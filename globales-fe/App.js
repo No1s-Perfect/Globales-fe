@@ -1,12 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Papaya from './components/Papaya';
+import Melon from './components/Melon';
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start on  </Text>
-      <StatusBar style="auto"/>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Papaya}/>
+        <Stack.Screen name="Melon" component={Melon}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

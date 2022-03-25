@@ -8,7 +8,8 @@ import { Formik } from "formik";
 //icons
 import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
 
-
+//keyboard avoiding view
+import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 
 import{ 
     StyledContainer,
@@ -31,7 +32,7 @@ import{
     TextLink,
     TextLinkContent,
 
-} from './../components/styles';
+} from '../components/styles';
 import {View, TouchableOpacity} from 'react-native';
 
 //Colors
@@ -41,7 +42,7 @@ const {brand,darkLight, primary} = Colors;
 import DateTimePicker from '@react-native-community/datetimepicker';
 
  
-const Singup = () => {
+const Signup = () => {
     const [hidePassword, setHidePassword] = useState(true);
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(new Date(2000,0,1));
@@ -62,6 +63,7 @@ const Singup = () => {
     }
  
     return (
+        <KeyboardAvoidingWrapper>
         <StyledContainer>
         <StatusBar style="dark"/>
         <InnerContainer>
@@ -169,6 +171,7 @@ const Singup = () => {
 
             </InnerContainer>        
         </StyledContainer>
+        </KeyboardAvoidingWrapper>
     );
 
 }
@@ -198,4 +201,4 @@ const MyTextInput = ({label, icon, isPassword, hidePassword,setHidePassword, isD
 
 }
 
-export default Singup;
+export default Signup;

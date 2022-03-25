@@ -20,13 +20,13 @@ const { primary,secondary,tertiary,darkLight,brand,green,red} = Colors;
 export const StyledContainer = styled.View`
     flex: 1;
     padding: 25px;
-    padding-top: ${StatusBarHeight + 10};
+    padding-top: ${StatusBarHeight + 30}px;
     background-color: ${primary};
 `
 
 export const InnerContainer = styled.View`
     flex: 1;
-    width: 100%;
+    width: '100%';
     align-items: center;
 `;
 
@@ -41,6 +41,10 @@ export const PageTitle = styled.Text`
     font-weight: bold;
     color: ${brand};
     padding: 10px;
+
+    ${(props) => props.welcome && `
+        font-size: 35px;
+    `}
 `;
 
 export const SubTile = styled.Text`
@@ -49,6 +53,11 @@ export const SubTile = styled.Text`
     letter-spacing: 1px;
     font-weight: bold;
     color: ${tertiary};
+
+    ${(props) => props.welcome && `
+    margin-bottom: 5px;
+    font-weight: normal;
+`}
 `;
 
 export const StyledFormArea = styled.View`
@@ -149,4 +158,25 @@ export const TextLink = styled.TouchableOpacity`
 export const TextLinkContent = styled.Text`
     color: ${brand};
     font-size: 15px;
+`;
+
+export const WelcomeContainer = styled(InnerContainer)`
+    padding: 25px;
+    padding-top: 10px;
+    justify-content: center;
+`;
+
+export const Avatar = styled.Image`
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border-radius: 50px;
+    border-color: ${secondary};
+    margin-bottom: 10px;
+    margin-top: 10px
+`;
+
+export const WelcomeImage = styled.Image`
+    height: 50%;
+    min-width: 100%;
 `;

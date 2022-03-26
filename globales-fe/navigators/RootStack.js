@@ -37,7 +37,7 @@ const RootStack = () => {
 
                 <Stack.Screen name="Login" component={Login}/>
                 <Stack.Screen name="Signup" component={Signup}/>
-                <Stack.Screen option={{ headerTintColor: primary}}name="Welcome" component={Welcome}/>
+                <Stack.Screen option={{ headerTintColor: primary  }}name="Welcome" component={Welcome}/>
             </Stack.Navigator>
         </NavigationContainer>
 

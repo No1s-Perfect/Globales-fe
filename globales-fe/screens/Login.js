@@ -49,7 +49,7 @@ const Login = ({navigation}) => {
         <StyledContainer>
         <StatusBar style="dark"/>
         <InnerContainer>
-            <PageLogo resizeMode="cover" source={require('./../assets/img/img1.png')}/>
+            <PageLogo resizeMode="cover" source={require('./../assets/img/rayo.png')}/>
                 <PageTitle> Empleo Express </PageTitle>
                 <SubTile>Account Login</SubTile>
 

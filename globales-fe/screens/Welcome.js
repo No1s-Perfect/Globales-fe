@@ -1,10 +1,6 @@
 import React, {useState} from "react";
 import { StatusBar } from "expo-status-bar";
 
-
-
-
-
 import{ 
    InnerContainer, 
     PageTitle, 
@@ -16,14 +12,9 @@ import{
     WelcomeContainer,
     WelcomeImage,
     Avatar,
-
 } from './../components/styles';
-
-
  
-const Welcome = () => {
-    
-
+const Welcome = ({navigation}) => {
     return (
         <>
         <StatusBar style ="light" />
@@ -35,17 +26,15 @@ const Welcome = () => {
                 <SubTile welcome={true}>Name</SubTile>
                     <StyledFormArea>  
                     <Avatar resizeMode="cover" source={require('./../assets/img/img1.png')}/>
-              
                         <Line/>
-                        <StyledButton onPress={()=>{}}>
-                            <ButtonText>Logout</ButtonText>
-                        </StyledButton>
-                    </StyledFormArea>
-                </WelcomeContainer>
-            </InnerContainer>        
+                    <StyledButton onPress={()=>{navigation.navigate('Login');}}>
+                        <ButtonText>Logout</ButtonText>
+                    </StyledButton>
+                </StyledFormArea>
+            </WelcomeContainer>
+        </InnerContainer>        
         </>
     );
-
 }
 
 export default Welcome;

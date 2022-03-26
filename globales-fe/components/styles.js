@@ -20,17 +20,18 @@ const { primary,secondary,tertiary,darkLight,brand,green,red} = Colors;
 export const StyledContainer = styled.View`
     flex: 1;
     padding: 25px;
-    padding-top: ${StatusBarHeight + 30}px;
+    ${StatusBarHeight && `padding-top:${StatusBarHeight + 30}px`};
     background-color: ${primary};
 `
 
 export const InnerContainer = styled.View`
     flex: 1;
-    width: '100%';
+    width: 100%;
     align-items: center;
 `;
 
 export const PageLogo = styled.Image`
+    resizeMode: contain;
     width: 250px;
     height: 200px;
 `;

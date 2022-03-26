@@ -14,7 +14,6 @@ import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
 import{ 
     StyledContainer,
     InnerContainer, 
-    PageLogo, 
     PageTitle, 
     SubTile, 
     StyledFormArea, 
@@ -83,6 +82,7 @@ const Signup = () => {
                     initialValues={{fullName: '', email: '',dateOfBirth:'',password:'',confirmPassword:''}}
                     onSubmit={(values) => {
                         console.log(values);
+                        navigation.navigate('Welcome');
                     }}
                 >
                     {({handleChange, handleBlur, handleSubmit,values}) => ( <StyledFormArea>
@@ -149,13 +149,13 @@ const Signup = () => {
                         />
                         <MsgBox>...</MsgBox>
                         <StyledButton onPress={handleSubmit}>
-                            <ButtonText>Login</ButtonText>
+                            <ButtonText>Signup</ButtonText>
                         </StyledButton>
                         <Line/>
                         
                         <ExtraView>
                             <ExtraText>Already have an account?</ExtraText>
-                            <TextLink>
+                            <TextLink onPress={()=>{ navigation.navigate('Login');}}>
                                 <TextLinkContent>Login</TextLinkContent>
                             </TextLink>
 
@@ -191,7 +191,7 @@ const MyTextInput = ({label, icon, isPassword, hidePassword,setHidePassword, isD
             )}
             {isPassword && (
                    <RightIcon onPress={()=> setHidePassword(!hidePassword)}>
-                       <Ionicons name={hidePassword ? 'md-eye-off': 'md-eye'} size={30} color={darkLight}></Ionicons>
+                       <Ionicons name={hidePassword ? 'md-eye-off': 'md-eye'} size={30} color={darkLight}/>
                    </RightIcon>
             )}
 

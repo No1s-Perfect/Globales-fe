@@ -7,6 +7,11 @@ import { Formik } from "formik";
 //icons
 import { Octicons, Ionicons, Fontisto } from "@expo/vector-icons";
 
+//API client
+import axios from 'axios';
+
+import * as Google from 'expo-google-app-auth'
+
 
 
 import{ 
@@ -31,7 +36,7 @@ import{
     TextLinkContent,
 
 } from './../components/styles';
-import {View} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 
 //Colors
 const {brand,darkLight, primary} = Colors;
@@ -43,6 +48,67 @@ import KeyboardAvoidingWrapper from "../components/KeyboardAvoidingWrapper";
  
 const Login = ({navigation}) => {
     const [hidePassword, setHidePassword] = useState(true);
+    const [message, setMessage] = useState();
+    const [messageType, setMessageType] = useState();
+    const [googleSubmitting, setGoogleSubmitting] = useState(false);
+    
+
+    const handleLogin = (credentials, setSubmitting) => {
+        handleMessage(null);
+        const url= '';
+        axios
+        .post(url,credentials)
+        .then((response) => {
+            const result = response.data;
+            const {message, status, data} = result;
+
+            if(status !== 'SUCCESS'){
+                handleMessage(message, status);
+            }else{
+                navigation.navigate('Welcome', {...data[0]});
+            }
+            setSubmitting(false);
+        })
+        .catch(error => {
+            console.log(error.JSON());
+            setSubmitting(false);
+            handleMessage("An error occurred. Check your network and try again");
+        });
+    };
+
+    const handleMessage = (message,type = 'FAILED') => {
+        setMessage(message);
+        setMessageType(type);
+    };
+
+
+    const handleGoogleSignin = () => {
+        setGoogleSubmitting(true);
+        const config = {
+            iosClientId: `155576919300-drekt65fs76tm3op95akmehd0ppnpheq.apps.googleusercontent.com`,
+            scopes: ['profile', 'email']    
+        };
+        Google
+        .logInAsync(config)
+        .then((result) => {
+            const {type, user} = result;
+
+            if(type=='success'){
+                const{email,name,photoUrl} = user;
+                handleMessage('Google signin was successful','SUCCESS');
+                setTimeout(() => navigation.navigate('Welcome', {email,name,photoUrl})),1000;
+            }else{
+                handleMessage('Google signin was cancelled');
+            }
+            setGoogleSubmitting(false);
+        })
+        .catch(error => {
+            console.log(error);
+            handleMessage('An error occured. Check network and try again');
+            setGoogleSubmitting(false);
+        })
+    };
+
 
     return (
         <KeyboardAvoidingWrapper>
@@ -55,12 +121,19 @@ const Login = ({navigation}) => {
 
                 <Formik
                     initialValues={{email: '', password: ''}}
-                    onSubmit={(values) => {
-                        console.log(values);
-                        navigation.navigate("Welcome");
+                    onSubmit={(values,{setSubmitting}) => {
+                        if(values.email == '' || values.password == ''){
+                            handleMessage('Please fill all the fields');
+                            setSubmitting(false)
+                        }else{
+                            //handleLogin(values, setSubmitting);
+                            console.log(values);
+                            navigation.navigate("Welcome"); 
+                        }
+                        
                     }}
                 >
-                    {({handleChange, handleBlur, handleSubmit,values}) => ( <StyledFormArea>
+                    {({handleChange, handleBlur, handleSubmit, values, isSubmitting}) => ( <StyledFormArea>
                         <MyTextInput
                             label="Email Address"
                             icon="mail"
@@ -71,7 +144,6 @@ const Login = ({navigation}) => {
                             value={values.email}
                             keyboardType="email-address"
                         />
-
                         <MyTextInput
                             label="Password"
                             icon="lock"
@@ -85,15 +157,41 @@ const Login = ({navigation}) => {
                             hidePassword={hidePassword}
                             setHidePassword={setHidePassword}
                         />
-                        <MsgBox>...</MsgBox>
+                        <MsgBox type = {messageType}>{message}</MsgBox>
+                        
+                    
+                        {/*
+                        {!isSubmitting && (
+                            <StyledButton onPress= {handleSubmit}>
+                                <ButtonText>Login</ButtonText>
+                            </StyledButton>
+                        )}
+                        {isSubmitting && (
+                            <StyledButton disabled={true}>
+                                <ActivityIndicator size="large" color={primary}/>
+                            </StyledButton>
+                        )}
+                        */}
+
                         <StyledButton onPress={handleSubmit}>
                             <ButtonText>Login</ButtonText>
                         </StyledButton>
+
                         <Line/>
-                        <StyledButton google={true} onPress={handleSubmit}>
+
+                        {!googleSubmitting && (
+                            <StyledButton google={true} onPress={handleGoogleSignin}>
                             <Fontisto name="google" color={primary} size={25}/>
                             <ButtonText google={true}>Sign in with Google</ButtonText>
                         </StyledButton>
+                        )}
+
+                        {googleSubmitting && (
+                        <StyledButton google={true} disabled={true}>
+                           <ActivityIndicator size="large" color={primary}/>
+                        </StyledButton>
+
+                        )}
                         <ExtraView>
                             <ExtraText>Don't have an account already?</ExtraText>
                             <TextLink onPress={() => {navigation.navigate("Signup");}}>
@@ -101,12 +199,7 @@ const Login = ({navigation}) => {
                             </TextLink>
 
                         </ExtraView>
-
-
-
-
-
-                        </StyledFormArea>)}
+                    </StyledFormArea>)}
                 </Formik>
 
 

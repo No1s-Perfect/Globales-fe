@@ -66,7 +66,7 @@ const Login = ({navigation}) => {
                             icon="mail"
                             placeholder=""
                             placeholderTextColor={darkLight}
-                            onchangeText={handleChange('email')}
+                            onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
                             value={values.email}
                             keyboardType="email-address"
@@ -77,7 +77,7 @@ const Login = ({navigation}) => {
                             icon="lock"
                             placeholder=""
                             placeholderTextColor={darkLight}
-                            onchangeText={handleChange('password')}
+                            onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
                             value={values.password}
                             secureTextEntry={hidePassword}

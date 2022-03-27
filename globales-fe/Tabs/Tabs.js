@@ -1,18 +1,18 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Papaya from "../components/Papaya";
 import Melon from "../components/Melon";
+import Cards from "../screens/Cards";
 const Tab = createBottomTabNavigator();
 const Tabs = () => (
   <Tab.Navigator
-    initialRouteName="Notifications"
+    initialRouteName="Feed"
     screenOptions={{
       tabBarActiveTintColor: "#e91e63",
     }}
   >
     <Tab.Screen
       name="Feed"
-      component={Papaya}
+      component={Cards}
       options={{
         tabBarLabel: "Home",
         tabBarIcon: ({ color, size }) => (

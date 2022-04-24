@@ -2,6 +2,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Melon from "../components/Melon";
 import Cards from "../screens/Cards";
+import Post from "../components/Post";
+
 const Tab = createBottomTabNavigator();
 const Tabs = () => (
   <Tab.Navigator
@@ -21,6 +23,16 @@ const Tabs = () => (
       }}
     />
     <Tab.Screen
+      name="Posts"
+      component={Post}
+      options={{
+        tabBarLabel: "Post",
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="plus-circle-outline" color={color} size={size} />
+        ),
+      }}
+    />
+    <Tab.Screen
       name="Notifications"
       component={Melon}
       options={{
@@ -32,5 +44,6 @@ const Tabs = () => (
     />
   </Tab.Navigator>
 );
+
 
 export default Tabs;

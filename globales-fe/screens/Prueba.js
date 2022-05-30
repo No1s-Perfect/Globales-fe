@@ -1,4 +1,4 @@
-import { View, Text, Button } from "react-native";
+import { View, } from "react-native";
 
 const Preba = () => <View></View>
  

@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { StatusBar } from "expo-status-bar";
-
+import UserContext from '../components/context/UserContext';
 //formik
 import { Formik } from "formik";
 
@@ -51,11 +51,13 @@ const Login = ({navigation}) => {
     const [message, setMessage] = useState();
     const [messageType, setMessageType] = useState();
     const [googleSubmitting, setGoogleSubmitting] = useState(false);
-    
+    const {user,setUser} = useContext(UserContext)
 
     const handleLogin = (credentials, setSubmitting) => {
         handleMessage(null);
         const url= '';
+        setUser({email:credentials.email})
+        return;
         axios
         .post(url,credentials)
         .then((response) => {
@@ -65,7 +67,8 @@ const Login = ({navigation}) => {
             if(status !== 'SUCCESS'){
                 handleMessage(message, status);
             }else{
-                navigation.navigate('Welcome', {...data[0]});
+                //navigation.navigate('Welcome', {...data[0]});
+                setUser({email:credentials.email})
             }
             setSubmitting(false);
         })
@@ -126,9 +129,11 @@ const Login = ({navigation}) => {
                             handleMessage('Please fill all the fields');
                             setSubmitting(false)
                         }else{
+
                             //handleLogin(values, setSubmitting);
+                            handleLogin(values,setSubmitting)
                             console.log(values);
-                            navigation.navigate("Welcome"); 
+                            //navigation.navigate("Welcome"); 
                         }
                         
                     }}

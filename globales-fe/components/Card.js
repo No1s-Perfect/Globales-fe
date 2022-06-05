@@ -6,7 +6,7 @@ import { useState } from "react";
 import FeedBackList from "./FeedBackList";
 import Toast from "react-native-toast-message";
 import Spinner from "./Spinner";
-const CardView = ({ setShow, title, parla }) => {
+const CardView = ({ setShow, title, parla,url,numTelefono, ubicacion, nomUsuario }) => {
   const [viewInfo, setViewInfo] = useState(false);
   const [viewReviews, setViewReviews] = useState(false);
   const [sendMsg, setSendMsg] = useState(false);
@@ -56,7 +56,7 @@ const CardView = ({ setShow, title, parla }) => {
           <Card.Image
             style={{ padding: 0 }}
             source={{
-              uri: "https://awildgeographer.files.wordpress.com/2015/02/john_muir_glacier.jpg",
+              uri: url,
             }}
           />
           <Text style={{ marginBottom: 10 }}>{parla}</Text>
@@ -73,8 +73,11 @@ const CardView = ({ setShow, title, parla }) => {
           </View>
         </>
       )}
-      {viewInfo && <Info setViewInfo={setViewInfo} />}
-      {viewReviews && <FeedBackList />}
+      {viewInfo && <Info numTelefono={numTelefono}
+                     ubicacion={ubicacion}
+                     nomUsuario={nomUsuario}
+                    ></Info>}
+      {viewReviews && <FeedBackList/>}
       {sendMsg && (
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Spinner msg="Laoding please wait..." />

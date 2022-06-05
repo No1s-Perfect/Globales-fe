@@ -57,7 +57,7 @@ const Login = ({navigation}) => {
 
     const handleLogin = async({correoElectronico, password}, setSubmitting) => {
         handleMessage(null);
-        const url= 'https://a705-201-199-92-169.ngrok.io/login';
+        const url= 'https://0778-186-179-64-43.ngrok.io/login';
         const params = JSON.stringify({
                 "correoElectronico": correoElectronico,
                 "password": password,

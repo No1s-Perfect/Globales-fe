@@ -79,7 +79,7 @@ const Signup = ({navigation}) => {
 
     const handleSignup = ({nombreUsuario,correoElectronico,password,fecNacimento}, setSubmitting) => {
         handleMessage(null);
-        const url= 'https://ecde-201-199-92-169.ngrok.io/addUser';
+        const url= 'https://0778-186-179-64-43.ngrok.io/addUser';
         const params = JSON.stringify({
                 "nombreUsuario": nombreUsuario,
                 "correoElectronico": correoElectronico,

@@ -1,6 +1,7 @@
 import CardView from "./Card";
 import { FlatList } from "react-native";
 const CardList = ({ setShow, infoCards }) => {
+  {console.log(infoCards)}
   return (
     <>
       {
@@ -8,8 +9,12 @@ const CardList = ({ setShow, infoCards }) => {
           <CardView
             key={index}
             setShow={setShow}
-            title={info.title}
-            parla={info.parla}
+            title={info.descripcionCategoria}
+            parla={info.descripcionOferta}
+            url={info.pathCategoria}
+            numTelefono={info.numTelefono}
+            ubicacion={info.ubicacion}
+            nomUsuario={info.nombreUsuario}
           ></CardView>
         ))}
     </>

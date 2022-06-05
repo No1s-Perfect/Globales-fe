@@ -149,9 +149,9 @@ const Signup = ({navigation}) => {
                             setSubmitting(false);
                         }
                         else{
-                            //handleSignup(values, setSubmitting);
+                            handleSignup(values, setSubmitting);
                             console.log(values);
-                            navigation.navigate("Welcome"); 
+                            navigation.navigate("Login"); 
                         }
                         
                     }}

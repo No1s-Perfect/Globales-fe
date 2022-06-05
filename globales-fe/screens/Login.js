@@ -1,7 +1,8 @@
 import React, {useState, useContext} from "react";
 import { StatusBar } from "expo-status-bar";
-//import UserContext from './components/context/UserContext';
+
 import UserContext from "../components/context/UserContext";
+
 //formik
 import { Formik } from "formik";
 
@@ -52,7 +53,6 @@ const Login = ({navigation}) => {
     const [message, setMessage] = useState();
     const [messageType, setMessageType] = useState();
     const [googleSubmitting, setGoogleSubmitting] = useState(false);
-    
     const {user,setUser} = useContext(UserContext)
 
     const handleLogin = async({correoElectronico, password}, setSubmitting) => {
@@ -69,29 +69,7 @@ const Login = ({navigation}) => {
                 "content-type": "application/json",
             },
         })
-        .then((response) => {
-            const result = response;
-            const {status, data} = result;
-            console.log(status);
-            setUser({email:correoElectronico})
-            
-            if(status!=200){
-                handleMessage("I'm sorry, something is wrong... :(", status);
-            }else{
-                console.log("all ok")
-                navigation.navigate('Welcome', {...data[0]});
-            }
-            setSubmitting(false);
-        })
-        .catch((error)=> {
-            setSubmitting(false);
-            handleMessage("An error occurred. Check your network and try again");
-        });
-        /*.catch(error => {
-            console.log(error);
-            setSubmitting(false);
-            handleMessage("An error occurred. Check your network and try again");
-        });*/
+
     };
 
     const handleMessage = (message,type = 'FAILED') => {

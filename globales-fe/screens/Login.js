@@ -2,6 +2,7 @@ import React, {useState, useContext} from "react";
 import { StatusBar } from "expo-status-bar";
 
 import UserContext from "../components/context/UserContext";
+
 //formik
 import { Formik } from "formik";
 
@@ -52,7 +53,6 @@ const Login = ({navigation}) => {
     const [message, setMessage] = useState();
     const [messageType, setMessageType] = useState();
     const [googleSubmitting, setGoogleSubmitting] = useState(false);
-    
     const {user,setUser} = useContext(UserContext)
 
     const handleLogin = async({correoElectronico, password}, setSubmitting) => {

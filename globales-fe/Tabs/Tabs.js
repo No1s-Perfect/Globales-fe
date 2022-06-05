@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Melon from "../components/Melon";
 import Cards from "../screens/Cards";
 import Post from "../components/Post";
+import AddService from "../screens/AddService";
 
 const Tab = createBottomTabNavigator();
 const Tabs = () => (
@@ -23,10 +24,10 @@ const Tabs = () => (
       }}
     />
     <Tab.Screen
-      name="Posts"
-      component={Post}
+      name="Add a New Service"
+      component={AddService}
       options={{
-        tabBarLabel: "Post",
+        tabBarLabel: "Create Service",
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="plus-circle-outline" color={color} size={size} />
         ),

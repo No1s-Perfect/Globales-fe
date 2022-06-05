@@ -6,7 +6,7 @@ import { useState } from "react";
 import FeedBackList from "./FeedBackList";
 import Toast from "react-native-toast-message";
 import Spinner from "./Spinner";
-const CardView = ({ setShow, title, parla,url,numTelefono, ubicacion, nomUsuario }) => {
+const CardView = ({ setShow,idOferta, title, parla,url,numTelefono, ubicacion, nomUsuario }) => {
   const [viewInfo, setViewInfo] = useState(false);
   const [viewReviews, setViewReviews] = useState(false);
   const [sendMsg, setSendMsg] = useState(false);
@@ -77,7 +77,7 @@ const CardView = ({ setShow, title, parla,url,numTelefono, ubicacion, nomUsuario
                      ubicacion={ubicacion}
                      nomUsuario={nomUsuario}
                     ></Info>}
-      {viewReviews && <FeedBackList/>}
+      {viewReviews && <FeedBackList idOferta={idOferta}></FeedBackList>}
       {sendMsg && (
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Spinner msg="Laoding please wait..." />

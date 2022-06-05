@@ -1,30 +1,44 @@
 import { ScrollView } from "react-native";
+import { useState,useEffect } from "react";
 import Feed from "./Feed";
+//API client
+import axios from 'axios';
 
-const FeedBackList = () => {
-  const DATA = [
-    {
-      star: 5,
-      message: "BUENO ESTE MAE APESTA",
-      nombre: "DAVID ZARATE",
-      id: 1,
-    },
-    {
-      star: 4,
-      message: "WTF",
-      nombre: "JUANITO DEL BOSQUE",
-      id: 2,
-    },
-  ];
+const FeedBackList = ({idOferta}) => {
+  
+  const [FeedBacks, setFeedBacks] = useState([  ]);
+  
+  const handleFeedBack = async() => {
+    const url=`https://0778-186-179-64-43.ngrok.io/feedback/${idOferta}`;
+ 
+  await axios
+    .get(url)
+    .then((response) => {
+        const result = response;
+        const {status, data} = result;
+        if(status!=200){
+          console.log("status 200")
+        }else{
+            console.log(data)
+            setFeedBacks(data)
+        }
+    })
+    .catch((error)=> {
+      console.log(error);
+    });
+};
+useEffect(() => {
+  handleFeedBack();
+}, []);
 
   return (
     <ScrollView>
-      {DATA.map((info, index) => (
+      {FeedBacks.map((info, index) => (
         <Feed
           key={index}
-          star={info.star}
-          nombre={info.nombre}
-          msg={info.message}
+          star={info.calificacion}
+          nombre={info.nombreUsuario}
+          msg={info.retroalimentacion}
         />
       ))}
     </ScrollView>

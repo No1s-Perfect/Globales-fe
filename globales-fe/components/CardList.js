@@ -9,6 +9,7 @@ const CardList = ({ setShow, infoCards }) => {
           <CardView
             key={index}
             setShow={setShow}
+            idOferta={info.idOferta}
             title={info.descripcionCategoria}
             parla={info.descripcionOferta}
             url={info.pathCategoria}

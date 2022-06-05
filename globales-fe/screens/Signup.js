@@ -43,6 +43,17 @@ const {brand,darkLight, primary} = Colors;
 //DateTimePicker
 import DateTimePicker from '@react-native-community/datetimepicker';
 
+const sendMessageAndShowToasty = () => {
+    setSendMsg(true);
+    setTimeout(() => {
+      setSendMsg(false);
+      Toast.show({
+        type: "success",
+        text1: "OK!",
+        text2: "It was done successfully 👋",
+      });
+    }, 3000);
+  };
  
 const Signup = ({navigation}) => {
     const [hidePassword, setHidePassword] = useState(true);
@@ -66,24 +77,37 @@ const Signup = ({navigation}) => {
         setShow(true);
     };
 
-    const handleSignup = (credentials, setSubmitting) => {
+    const handleSignup = ({nombreUsuario,correoElectronico,password,fecNacimento}, setSubmitting) => {
         handleMessage(null);
-        const url= '';
+        const url= 'https://ecde-201-199-92-169.ngrok.io/addUser';
+        const params = JSON.stringify({
+                "nombreUsuario": nombreUsuario,
+                "correoElectronico": correoElectronico,
+                "password":password,
+                "fecNacimento":fecNacimento,
+            });
         axios
-        .post(url,credentials)
-        .then((response) => {
-            const result = response.data;
-            const {message, status, data} = result;
+        .post(url,params,{
+            "headers": {
+                "content-type": "application/json",
+            },
+        })
+        .then((response) => {            
+            const result = response;
+            const {status, data} = result;
+            console.log(status);
 
-            if(status !== 'SUCCESS'){
+            if(status != '200'){
                 handleMessage(message, status);
             }else{
-                navigation.navigate('Welcome', {...data});
+                
+            //sendMessageAndShowToasty();
+                
             }
             setSubmitting(false);
         })
         .catch(error => {
-            console.log(error.JSON());
+           // console.log(error.JSON());
             setSubmitting(false);
             handleMessage("An error occurred. Check your network and try again");
         });
@@ -114,17 +138,16 @@ const Signup = ({navigation}) => {
                     )}
                 
                 <Formik
-                    initialValues={{name: '', email: '', dateOfBirth:'', password:'',confirmPassword:''}}
+                    initialValues={{nombreUsuario: '', correoElectronico: '', fecNacimento:'', password:'',confirmPassword:''}}
                     onSubmit={(values,{setSubmitting}) => {
-                        values = {...values, dateOfBirth: dob.toDateString()};
-                        if(values.name == '' || values.email == ''|| values.dateOfBirth == ""|| values.password== "" || values.confirmPassword==""){
+                        values = {...values, fecNacimento: dob.toDateString()};
+                        if(values.nombreUsuario == '' || values.correoElectronico == ''|| values.fecNacimento == ""|| values.password== "" || values.confirmPassword==""){
                             handleMessage('Please fill all the fields');
                             setSubmitting(false);
                         }else if(values.password !== values.confirmPassword){
                             handleMessage('Passwords do not match');
                             setSubmitting(false);
                         }
-                        
                         else{
                             //handleSignup(values, setSubmitting);
                             console.log(values);
@@ -140,18 +163,18 @@ const Signup = ({navigation}) => {
                             icon="person"
                             placeholder=""
                             placeholderTextColor={darkLight}
-                            onChangeText={handleChange('name')}
-                            onBlur={handleBlur('name')}
-                            value={values.name}
+                            onChangeText={handleChange('nombreUsuario')}
+                            onBlur={handleBlur('nombreUsuario')}
+                            value={values.nombreUsuario}
                         />
                         <MyTextInput
                             label="Email Address"
                             icon="mail"
                             placeholder=""
                             placeholderTextColor={darkLight}
-                            onChangeText={handleChange('email')}
-                            onBlur={handleBlur('email')}
-                            value={values.email}
+                            onChangeText={handleChange('correoElectronico')}
+                            onBlur={handleBlur('correoElectronico')}
+                            value={values.correoElectronico}
                             keyboardType="email-address"
                         />
                         <MyTextInput
@@ -159,8 +182,8 @@ const Signup = ({navigation}) => {
                             icon="calendar"
                             placeholder= "YYYY - MM - DD"
                             placeholderTextColor={darkLight}
-                            onChangeText={handleChange('dateOfBirth')}
-                            onBlur={handleBlur('dateOfBirth')}
+                            onChangeText={handleChange('fecNacimento')}
+                            onBlur={handleBlur('fecNacimento')}
                             value={dob ? dob.toDateString() : ''}  
                             isDate={true}
                             editable= {false}

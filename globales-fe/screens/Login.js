@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { StatusBar } from "expo-status-bar";
-
+//import UserContext from './components/context/UserContext';
+import UserContext from "../components/context/UserContext";
 //formik
 import { Formik } from "formik";
 
@@ -52,28 +53,45 @@ const Login = ({navigation}) => {
     const [messageType, setMessageType] = useState();
     const [googleSubmitting, setGoogleSubmitting] = useState(false);
     
+    const {user,setUser} = useContext(UserContext)
 
-    const handleLogin = (credentials, setSubmitting) => {
+    const handleLogin = async({correoElectronico, password}, setSubmitting) => {
         handleMessage(null);
-        const url= '';
-        axios
-        .post(url,credentials)
+        const url= 'https://ecde-201-199-92-169.ngrok.io/login';
+        const params = JSON.stringify({
+                "correoElectronico": correoElectronico,
+                "password": password,
+            });
+        console.log(params)
+      await axios
+        .post(url,params,{
+            "headers": {
+                "content-type": "application/json",
+            },
+        })
         .then((response) => {
-            const result = response.data;
-            const {message, status, data} = result;
-
-            if(status !== 'SUCCESS'){
-                handleMessage(message, status);
+            const result = response;
+            const {status, data} = result;
+            console.log(status);
+            setUser({email:correoElectronico})
+            
+            if(status!=200){
+                handleMessage("I'm sorry, something is wrong... :(", status);
             }else{
+                console.log("all ok")
                 navigation.navigate('Welcome', {...data[0]});
             }
             setSubmitting(false);
         })
-        .catch(error => {
-            console.log(error.JSON());
+        .catch((error)=> {
             setSubmitting(false);
             handleMessage("An error occurred. Check your network and try again");
         });
+        /*.catch(error => {
+            console.log(error);
+            setSubmitting(false);
+            handleMessage("An error occurred. Check your network and try again");
+        });*/
     };
 
     const handleMessage = (message,type = 'FAILED') => {
@@ -120,28 +138,28 @@ const Login = ({navigation}) => {
                 <SubTile>Account Login</SubTile>
 
                 <Formik
-                    initialValues={{email: '', password: ''}}
+                    initialValues={{correoElectronico: '', password: ''}}
                     onSubmit={(values,{setSubmitting}) => {
-                        if(values.email == '' || values.password == ''){
+                        if(values.correoElectronico == '' || values.password == ''){
                             handleMessage('Please fill all the fields');
                             setSubmitting(false)
                         }else{
-                            //handleLogin(values, setSubmitting);
-                            console.log(values);
-                            navigation.navigate("Welcome"); 
+                            handleLogin(values, setSubmitting);
+                            
+                            //navigation.navigate("Welcome"); 
                         }
                         
                     }}
                 >
                     {({handleChange, handleBlur, handleSubmit, values, isSubmitting}) => ( <StyledFormArea>
                         <MyTextInput
-                            label="Email Address"
+                            label="email Address"
                             icon="mail"
                             placeholder=""
                             placeholderTextColor={darkLight}
-                            onChangeText={handleChange('email')}
-                            onBlur={handleBlur('email')}
-                            value={values.email}
+                            onChangeText={handleChange('correoElectronico')}
+                            onBlur={handleBlur('correoElectronico')}
+                            value={values.correoElectronico}
                             keyboardType="email-address"
                         />
                         <MyTextInput

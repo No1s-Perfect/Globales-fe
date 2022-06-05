@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View, Text, TextInput, TouchableHighlight, StyleSheet } from "react-native";
 import Toast from "react-native-toast-message";
+
 const initialForm = {
     lugar:"",
     perfil:"",
@@ -49,32 +50,26 @@ const Post = () => {
             />
         </View>
         <View>
-            <Text style={styles.title}>Post Form</Text>
+            <Text style={styles.title}>Postulación de Empleo</Text>
             <TextInput
                 name="title"
                 style={styles.input}
-                placeholder="Lugar donde se requiere el servicio"
+                placeholder="Lugar donde se ofrece el servicio"
                 value={form.lugar}
                 onChangeText={(lugar) => setForm({[lugar]:lugar})}
             />
             <TextInput
                 style={styles.input}
-                placeholder="Perfil buscado"
+                placeholder="Tipo de servicio a ofrecer"
                 value={form.perfil}
                 onChangeText={(perfil) => setForm({[perfil]:perfil})}
             />
             <TextInput
                 multiline={true}
                 style={[styles.input, styles.textArea]}
-                placeholder="Descripción del trabajo que se desea realizar"
+                placeholder="Descripción del servicio que ofrece"
                 value={form.descripcion}
                 onChangeText={(descripcion) => setForm({[descripcion]:descripcion})}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Correo de contacto"
-                value={form.email}
-                onChangeText={(email) => setForm({[email]:email})}
             />
             <TextInput
                 style={styles.input}
@@ -84,7 +79,7 @@ const Post = () => {
             />
             <TextInput
                 style={styles.input}
-                placeholder="Salario"
+                placeholder="Precio del servicio por hora"
                 value={form.salario}
                 onChangeText={(salario) => setForm({[salario]:salario})}
             />
@@ -92,7 +87,7 @@ const Post = () => {
                 style={styles.button}
                 onPress={onSubmit}
             >
-                <Text style={styles.textButton}> Send Post</Text>
+                <Text style={styles.textButton}> Subir mi servicio</Text>
             </TouchableHighlight>
 
         </View>
@@ -120,7 +115,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 18,
         marginBottom: 5,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginBottom: 20,
     },
     button: {
         backgroundColor: "#01C13D",

@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import { StatusBar } from "expo-status-bar";
-//import UserContext from './components/context/UserContext';
+
 import UserContext from "../components/context/UserContext";
 //formik
 import { Formik } from "formik";
@@ -57,12 +57,12 @@ const Login = ({navigation}) => {
 
     const handleLogin = async({correoElectronico, password}, setSubmitting) => {
         handleMessage(null);
-        const url= 'https://ecde-201-199-92-169.ngrok.io/login';
+        const url= 'https://a705-201-199-92-169.ngrok.io/login';
         const params = JSON.stringify({
                 "correoElectronico": correoElectronico,
                 "password": password,
             });
-        console.log(params)
+     console.log(params)
       await axios
         .post(url,params,{
             "headers": {
@@ -72,7 +72,8 @@ const Login = ({navigation}) => {
         .then((response) => {
             const result = response;
             const {status, data} = result;
-            console.log(status);
+            const {userInfo, msg} = data;
+            console.log(userInfo);
             setUser({email:correoElectronico})
             
             if(status!=200){
@@ -87,11 +88,6 @@ const Login = ({navigation}) => {
             setSubmitting(false);
             handleMessage("An error occurred. Check your network and try again");
         });
-        /*.catch(error => {
-            console.log(error);
-            setSubmitting(false);
-            handleMessage("An error occurred. Check your network and try again");
-        });*/
     };
 
     const handleMessage = (message,type = 'FAILED') => {

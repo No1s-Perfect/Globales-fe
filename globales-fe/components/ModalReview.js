@@ -28,7 +28,7 @@ const ModalReview = ({ show, setShow }) => {
 
               {!fetchReview && (
                 <>
-                  <Review setShow={setShow}/>
+                  <Review setFetchReview={setFetchReview} setShow={setShow}/>
                 </>
               )}
               {fetchReview && <Spinner />}

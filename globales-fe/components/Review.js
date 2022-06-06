@@ -3,7 +3,7 @@ import { TextInput, StyleSheet, Pressable, Text, View } from 'react-native';
 import { useState } from 'react';
 import axios from 'axios';
 import Toast from "react-native-toast-message";
-const Review = ({setShow}) => {
+const Review = ({setShow,setFetchReview}) => {
   const [rating, setRating] = useState(0);
 
   const [text, setText] = useState('');
@@ -11,20 +11,26 @@ const Review = ({setShow}) => {
   const handleSubmit = async() => {
 
     try{
-      
+      setFetchReview(true)
       await axios.post(process.env.REACT_APP_REVIEW,{
         calificacion:rating,
         retroalimentacion:text,
         idUsuario:1,
         idOferta:1
       })
+      
       Toast.show({
         type: "success",
         text2: "Everything went smoothly 👋",
       });
-      setShow(false)
+      
+     
     }catch(e){
       console.log(e)
+    }
+    finally{
+      setFetchReview(false)
+      setShow(false)
     }
     
   }

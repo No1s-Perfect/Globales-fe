@@ -57,12 +57,11 @@ const Login = ({navigation}) => {
 
     const handleLogin = async({correoElectronico, password}, setSubmitting) => {
         handleMessage(null);
-        const url= 'https://0778-186-179-64-43.ngrok.io/login';
+        const url= 'https://dbcc-186-179-64-43.ngrok.io/login';
         const params = JSON.stringify({
                 "correoElectronico": correoElectronico,
                 "password": password,
             });
-     console.log(params)
       await axios
         .post(url,params,{
             "headers": {

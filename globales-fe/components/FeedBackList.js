@@ -9,7 +9,7 @@ const FeedBackList = ({idOferta}) => {
   const [FeedBacks, setFeedBacks] = useState([  ]);
   
   const handleFeedBack = async() => {
-    const url=`https://0778-186-179-64-43.ngrok.io/feedback/${idOferta}`;
+    const url=`https://dbcc-186-179-64-43.ngrok.io/feedback/${idOferta}`;
  
   await axios
     .get(url)
@@ -19,7 +19,6 @@ const FeedBackList = ({idOferta}) => {
         if(status!=200){
           console.log("status 200")
         }else{
-            console.log(data)
             setFeedBacks(data)
         }
     })

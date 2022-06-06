@@ -14,7 +14,7 @@ const Cards = () => {
   const [infoCards, setInfoCards] = useState([  ]);
   const handleOffers = async() => {
     
-    const url= 'https://0778-186-179-64-43.ngrok.io/offers';
+    const url= 'https://dbcc-186-179-64-43.ngrok.io/offers';
  
   await axios
     .get(url)
@@ -35,7 +35,6 @@ const Cards = () => {
 useEffect(() => {
   handleOffers();
 }, []);
- console.log(search+" ")
   return (
     <View>
       <Tostada />

@@ -52,16 +52,18 @@ const Login = ({ navigation }) => {
 
   const handleLogin = async ({ correoElectronico, password }, setSubmitting) => {
     handleMessage(null);
-    setUser({});
 
     try {
-      await axios.post(url.login, { correoElectronico, password });
+      const res = await axios.post(url.login, { correoElectronico, password });
       Toast.show({
-        type: "success",
-        text1: "Everything went smoothly 👋",
+        type: 'success',
+        text1: 'Everything went smoothly 👋',
       });
-      setUser({});
-    } catch (e) {console.log(e)}
+      console.log(res);
+      setUser({ id: res.data.id, email: correoElectronico, nombre: res.data.nombreUsuario });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleMessage = (message, type = 'FAILED') => {

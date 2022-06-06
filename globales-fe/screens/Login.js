@@ -60,7 +60,7 @@ const Login = ({ navigation }) => {
         text1: 'Everything went smoothly 👋',
       });
       console.log(res);
-      setUser({ id: res.data.id, email: correoElectronico, nombre: res.data.nombreUsuario });
+       setUser({ id: res.data.userInfo.id, email: correoElectronico, nombre: res.data.userInfo.nombreUsuario });
     } catch (e) {
       console.log(e);
     }

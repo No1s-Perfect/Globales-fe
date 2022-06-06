@@ -62,7 +62,11 @@ const Login = ({ navigation }) => {
       console.log(res);
        setUser({ id: res.data.userInfo.id, email: correoElectronico, nombre: res.data.userInfo.nombreUsuario });
     } catch (e) {
-      console.log(e);
+      console.log("@@@@@@@@@")
+      Toast.show({
+        type: 'error',
+        text1: 'Password or email are incorrect',
+      });
     }
   };
 

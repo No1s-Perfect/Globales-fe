@@ -1,9 +1,9 @@
 import Toast from "react-native-toast-message";
 import { View } from "react-native";
 
-const Tostada = () => (
+const Tostada = ({offSet = 5}) => (
   <View style={{ zIndex: 9000, elevation: 300000 }}>
-    <Toast topOffset={5}/>
+    <Toast topOffset={offSet}/>
   </View>
 );
 

@@ -1,10 +1,24 @@
-import CardView from "./Card";
-import { FlatList } from "react-native";
+import CardView from './Card';
+import { FlatList, Animated } from 'react-native';
+import { useEffect, useRef } from 'react';
 const CardList = ({ setShow, infoCards }) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  }, [fadeAnim]);
   return (
     <>
-      {
-        infoCards.map((info, index) => (
+      <Animated.View
+        style={{
+          opacity: fadeAnim,
+        }}
+      >
+        {infoCards.map((info, index) => (
           <CardView
             key={index}
             setShow={setShow}
@@ -17,6 +31,7 @@ const CardList = ({ setShow, infoCards }) => {
             nomUsuario={info.nombreUsuario}
           ></CardView>
         ))}
+      </Animated.View>
     </>
   );
 };

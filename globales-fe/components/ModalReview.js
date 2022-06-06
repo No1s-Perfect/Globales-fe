@@ -14,15 +14,7 @@ import Toast from "react-native-toast-message";
 const ModalReview = ({ show, setShow }) => {
   const [fetchReview, setFetchReview] = useState(false);
 
-  const handleSubmit = () => {
-    setFetchReview(true);
-    Toast.show({
-      type: "success",
-      text1: "Hello",
-      text2: "Everything went smoothly 👋",
-    });
-    setTimeout(() => setFetchReview(false), 3000);
-  };
+
 
   return (
     <>
@@ -36,14 +28,7 @@ const ModalReview = ({ show, setShow }) => {
 
               {!fetchReview && (
                 <>
-                  <Review />
-
-                  <Pressable
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={handleSubmit}
-                  >
-                    <Text style={styles.textStyle}>Enviar</Text>
-                  </Pressable>
+                  <Review setShow={setShow}/>
                 </>
               )}
               {fetchReview && <Spinner />}

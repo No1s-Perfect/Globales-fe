@@ -1,22 +1,45 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import ModalReview from "../components/ModalReview";
 import { View, ScrollView } from "react-native";
 import { SearchBar } from "react-native-elements";
 import Tostada from "../components/Tostada";
 import CardList from "../components/CardList";
+
+//API client
+import axios from 'axios';
+
 const Cards = () => {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState("");
-  const [infoCards, setInfoCards] = useState([
-    { title: "pruebis", parla: "i could be optinal if you guys want" },
-    { title: "pruebis2", parla: "OG OMGOMGOMGOMG" },
-  ]);
-
+  const [infoCards, setInfoCards] = useState([  ]);
+  const handleOffers = async() => {
+    
+    const url= 'https://dbcc-186-179-64-43.ngrok.io/offers';
+ 
+  await axios
+    .get(url)
+    .then((response) => {
+        const result = response;
+        const {status, data} = result;
+        if(status!=200){
+          console.log("status 200")
+        }else{
+            console.log("all ok")
+            setInfoCards(data)
+        }
+    })
+    .catch((error)=> {
+      console.log(error);
+    });
+};
+useEffect(() => {
+  handleOffers();
+}, []);
   return (
     <View>
       <Tostada />
       <SearchBar
-        placeholder="Search whatever your heart desires"
+        placeholder="Buscar ofertas según categoría"
         onChangeText={setSearch}
         value={search}
         lightTheme
@@ -27,8 +50,8 @@ const Cards = () => {
           <CardList
             infoCards={
               search.length > 0
-                ? infoCards.filter((info) => info.title === search)
-                : infoCards
+              ? infoCards.filter((info) => info.title == search)
+              : infoCards
             }
             setShow={setShow}
           />

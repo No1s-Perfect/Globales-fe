@@ -79,7 +79,7 @@ const Signup = ({navigation}) => {
 
     const handleSignup = ({nombreUsuario,correoElectronico,password,fecNacimento}, setSubmitting) => {
         handleMessage(null);
-        const url= 'https://ecde-201-199-92-169.ngrok.io/addUser';
+        const url= 'https://dbcc-186-179-64-43.ngrok.io/addUser';
         const params = JSON.stringify({
                 "nombreUsuario": nombreUsuario,
                 "correoElectronico": correoElectronico,
@@ -95,7 +95,6 @@ const Signup = ({navigation}) => {
         .then((response) => {            
             const result = response;
             const {status, data} = result;
-            console.log(status);
 
             if(status != '200'){
                 handleMessage(message, status);
@@ -107,7 +106,6 @@ const Signup = ({navigation}) => {
             setSubmitting(false);
         })
         .catch(error => {
-           // console.log(error.JSON());
             setSubmitting(false);
             handleMessage("An error occurred. Check your network and try again");
         });
@@ -149,9 +147,8 @@ const Signup = ({navigation}) => {
                             setSubmitting(false);
                         }
                         else{
-                            //handleSignup(values, setSubmitting);
-                            console.log(values);
-                            navigation.navigate("Welcome"); 
+                            handleSignup(values, setSubmitting);
+                            navigation.navigate("Login"); 
                         }
                         
                     }}

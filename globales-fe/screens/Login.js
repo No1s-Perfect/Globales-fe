@@ -57,19 +57,36 @@ const Login = ({navigation}) => {
 
     const handleLogin = async({correoElectronico, password}, setSubmitting) => {
         handleMessage(null);
-        const url= 'https://ecde-201-199-92-169.ngrok.io/login';
+        const url= 'https://dbcc-186-179-64-43.ngrok.io/login';
         const params = JSON.stringify({
                 "correoElectronico": correoElectronico,
                 "password": password,
             });
-        console.log(params)
       await axios
         .post(url,params,{
             "headers": {
                 "content-type": "application/json",
             },
         })
-
+        .then((response) => {
+            const result = response;
+            const {status, data} = result;
+            const {userInfo, msg} = data;
+            console.log(userInfo);
+            setUser({email:correoElectronico})
+            
+            if(status!=200){
+                handleMessage("I'm sorry, something is wrong... :(", status);
+            }else{
+                console.log("all ok")
+                navigation.navigate('Welcome', {...data[0]});
+            }
+            setSubmitting(false);
+        })
+        .catch((error)=> {
+            setSubmitting(false);
+            handleMessage("An error occurred. Check your network and try again");
+        });
     };
 
     const handleMessage = (message,type = 'FAILED') => {

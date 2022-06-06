@@ -6,8 +6,6 @@ import {
     Platform,
     Button,Picker
   } from 'react-native';
-  
-
 
 //formik
 import { Formik } from "formik";
@@ -76,7 +74,7 @@ const AddService = ({navigation}) => {
 
     const handleAddService = (credentials, setSubmitting) => {
         handleMessage(null);
-        const url= '';
+        const url= 'https://dbcc-186-179-64-43.ngrok.io/offers';
         axios
         .post(url,credentials)
         .then((response) => {
@@ -91,7 +89,7 @@ const AddService = ({navigation}) => {
             setSubmitting(false);
         })
         .catch(error => {
-            console.log(error.JSON());
+            //console.log(error.JSON());
             setSubmitting(false);
             handleMessage("An error occurred. Check your network and try again");
         });

@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, Animated } from "react-native";
 import { Icon } from "react-native-elements";
 import { useEffect, useRef } from "react";
-const Info = () => {
+const Info = ({numTelefono, ubicacion, nomUsuario}) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -24,7 +24,7 @@ const Info = () => {
           />
         </View>
         <View style={styles.text}>
-          <Text>+506 6075 1701</Text>
+          <Text>{numTelefono}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -39,7 +39,22 @@ const Info = () => {
           />
         </View>
         <View style={styles.text}>
-          <Text>Por Mc Donalds</Text>
+          <Text>{ubicacion}</Text>
+        </View>
+      </View>
+      <View style={styles.row}>
+        <View style={styles.right}>
+          <Icon
+            raised
+            size={10}
+            name="user"
+            type="evilicon"
+            color="#517fa4"
+            onPress={() => console.log("hello")}
+          />
+        </View>
+        <View style={styles.text}>
+          <Text>{nomUsuario}</Text>
         </View>
       </View>
     </Animated.View>

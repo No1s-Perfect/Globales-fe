@@ -3,28 +3,22 @@ import { useState,useEffect } from "react";
 import Feed from "./Feed";
 //API client
 import axios from 'axios';
-
+import { url } from "./Constants";
 const FeedBackList = ({idOferta}) => {
   
   const [FeedBacks, setFeedBacks] = useState([  ]);
   
   const handleFeedBack = async() => {
-    const url=`https://dbcc-186-179-64-43.ngrok.io/feedback/${idOferta}`;
+    try{
+
+      const {data} = await axios.get(`${url.feedback}/${idOferta}`)
+      setFeedBacks(data)
+    }catch(e){
+      console.log(e)
+    }
+    
  
-  await axios
-    .get(url)
-    .then((response) => {
-        const result = response;
-        const {status, data} = result;
-        if(status!=200){
-          console.log("status 200")
-        }else{
-            setFeedBacks(data)
-        }
-    })
-    .catch((error)=> {
-      console.log(error);
-    });
+  
 };
 useEffect(() => {
   handleFeedBack();

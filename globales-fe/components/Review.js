@@ -39,7 +39,7 @@ const Review = ({setShow,setFetchReview, idOferta}) => {
   return (
     <>
       <AirbnbRating
-        reviews={['Care', 'Barro', 'La', 'Cago', 'Puto']}
+             reviews={["Muy Mal", "Mal", "Regular", "Bueno", "Excelente"]}
         showRating
         size={20}
         startingValue={0}

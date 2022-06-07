@@ -14,6 +14,7 @@ const Cards = () => {
   const [search, setSearch] = useState('');
   const [infoCards, setInfoCards] = useState([]);
   const [fetching, setFetching] = useState(false);
+  const [idOferta,setIdOferta] = useState(-1)
   const handleOffers = async () => {
     try {
       setFetching(true);
@@ -50,6 +51,7 @@ const Cards = () => {
             <CardList
               infoCards={search.length > 0 ? infoCards.filter((info) => info.title == search) : infoCards}
               setShow={setShow}
+              setIdOferta={setIdOferta}
             />
           )}
           {fetching && (
@@ -61,7 +63,7 @@ const Cards = () => {
           )}
         </View>
       </ScrollView>
-      <ModalReview show={show} setShow={setShow} />
+      <ModalReview show={show} idOferta={idOferta}setShow={setShow} />
     </View>
   );
 };

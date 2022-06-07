@@ -1,12 +1,12 @@
-import { Text, Card, Button, Icon } from "react-native-elements";
-import { View, StyleSheet, Pressable } from "react-native";
-import IconsAction from "./IconsAction";
-import Info from "./Info";
-import { useState } from "react";
-import FeedBackList from "./FeedBackList";
-import Toast from "react-native-toast-message";
-import Spinner from "./Spinner";
-const CardView = ({ setShow,idOferta, title, parla,url,numTelefono, ubicacion, nomUsuario }) => {
+import { Text, Card, Button, Icon } from 'react-native-elements';
+import { View, StyleSheet, Pressable } from 'react-native';
+import IconsAction from './IconsAction';
+import Info from './Info';
+import { useState } from 'react';
+import FeedBackList from './FeedBackList';
+import Toast from 'react-native-toast-message';
+import Spinner from './Spinner';
+const CardView = ({ setShow, idOferta, title, parla, url, numTelefono, ubicacion, nomUsuario, setIdOferta }) => {
   const [viewInfo, setViewInfo] = useState(false);
   const [viewReviews, setViewReviews] = useState(false);
   const [sendMsg, setSendMsg] = useState(false);
@@ -20,9 +20,9 @@ const CardView = ({ setShow,idOferta, title, parla,url,numTelefono, ubicacion, n
     setTimeout(() => {
       setSendMsg(false);
       Toast.show({
-        type: "success",
-        text1: "Hello",
-        text2: "Everything went smoothly 👋",
+        type: 'success',
+        text1: 'Hello',
+        text2: 'Everything went smoothly 👋',
       });
     }, 3000);
   };
@@ -30,19 +30,14 @@ const CardView = ({ setShow,idOferta, title, parla,url,numTelefono, ubicacion, n
     <Card>
       {sendMsg && (
         <>
-          <Card.Title>
-            Sending your msg...
-          </Card.Title>
+          <Card.Title>Sending your msg...</Card.Title>
           <Card.Divider />
         </>
       )}
       {(viewInfo || viewReviews) && (
         <>
           <Card.Title>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={goBack}
-            >
+            <Pressable style={[styles.button, styles.buttonClose]} onPress={goBack}>
               <Text style={styles.textStyle}>Atras</Text>
             </Pressable>
           </Card.Title>
@@ -61,25 +56,22 @@ const CardView = ({ setShow,idOferta, title, parla,url,numTelefono, ubicacion, n
           />
           <Text style={{ marginBottom: 10 }}>{parla}</Text>
 
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-evenly" }}
-          >
+          <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
             <IconsAction
               setViewInfo={setViewInfo}
               setViewReviews={setViewReviews}
               sendMsg={sendMessageAndShowToasty}
               setShow={setShow}
+              setIdOferta={setIdOferta}
+              idOferta={idOferta}
             />
           </View>
         </>
       )}
-      {viewInfo && <Info numTelefono={numTelefono}
-                     ubicacion={ubicacion}
-                     nomUsuario={nomUsuario}
-                    ></Info>}
+      {viewInfo && <Info numTelefono={numTelefono} ubicacion={ubicacion} nomUsuario={nomUsuario}></Info>}
       {viewReviews && <FeedBackList idOferta={idOferta}></FeedBackList>}
       {sendMsg && (
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Spinner msg="Laoding please wait..." />
         </View>
       )}
@@ -90,17 +82,17 @@ const CardView = ({ setShow,idOferta, title, parla,url,numTelefono, ubicacion, n
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 22,
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 20,
     padding: 20,
-    alignItems: "center",
-    shadowColor: "#000",
+    alignItems: 'center',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -115,19 +107,19 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: '#F194FF',
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: '#2196F3',
   },
   textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center",
+    textAlign: 'center',
   },
 });
 

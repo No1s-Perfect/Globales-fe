@@ -1,7 +1,7 @@
 import CardView from './Card';
 import { FlatList, Animated } from 'react-native';
 import { useEffect, useRef } from 'react';
-const CardList = ({ setShow, infoCards }) => {
+const CardList = ({ setShow, infoCards,setIdOferta }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -29,6 +29,7 @@ const CardList = ({ setShow, infoCards }) => {
             numTelefono={info.numTelefono}
             ubicacion={info.ubicacion}
             nomUsuario={info.nombreUsuario}
+            setIdOferta={setIdOferta}
           ></CardView>
         ))}
       </Animated.View>

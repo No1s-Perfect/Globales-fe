@@ -11,7 +11,7 @@ import Review from "./Review";
 import { useState } from "react";
 import Spinner from "./Spinner";
 import Toast from "react-native-toast-message";
-const ModalReview = ({ show, setShow }) => {
+const ModalReview = ({ show, setShow, idOferta }) => {
   const [fetchReview, setFetchReview] = useState(false);
 
 
@@ -28,7 +28,7 @@ const ModalReview = ({ show, setShow }) => {
 
               {!fetchReview && (
                 <>
-                  <Review setFetchReview={setFetchReview} setShow={setShow}/>
+                  <Review idOferta={idOferta} setFetchReview={setFetchReview} setShow={setShow}/>
                 </>
               )}
               {fetchReview && <Spinner />}

@@ -1,22 +1,25 @@
 import { AirbnbRating } from 'react-native-ratings';
 import { TextInput, StyleSheet, Pressable, Text, View } from 'react-native';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import Toast from "react-native-toast-message";
-const Review = ({setShow,setFetchReview}) => {
+import UserContext from './context/UserContext';
+import { url } from './Constants';
+const Review = ({setShow,setFetchReview, idOferta}) => {
   const [rating, setRating] = useState(0);
-
+  const { user, setUser } = useContext(UserContext);
   const [text, setText] = useState('');
 
   const handleSubmit = async() => {
 
     try{
+      console.log(idOferta,'asdasdasdasd')
       setFetchReview(true)
-      await axios.post(process.env.REACT_APP_REVIEW,{
+      await axios.post(url.feedback,{
         calificacion:rating,
         retroalimentacion:text,
-        idUsuario:1,
-        idOferta:1
+        idUsuario:user.id,
+        idOferta:idOferta
       })
       
       Toast.show({
@@ -24,7 +27,6 @@ const Review = ({setShow,setFetchReview}) => {
         text2: "Everything went smoothly 👋",
       });
       
-     
     }catch(e){
       console.log(e)
     }

@@ -1,6 +1,6 @@
 import { Icon } from "react-native-elements";
 import { Pressable, Vibration } from "react-native";
-const IconsAction = ({ setShow, setViewInfo, setViewReviews, sendMsg }) => {
+const IconsAction = ({ setShow, setViewInfo, setViewReviews, sendMsg,setIdOferta,idOferta }) => {
   return (
     <>
       <Icon
@@ -14,6 +14,7 @@ const IconsAction = ({ setShow, setViewInfo, setViewReviews, sendMsg }) => {
         onLongPress={() => {
           Vibration.vibrate(10);
           setShow(true);
+          setIdOferta(idOferta)
         }}
         onPress={() => setViewReviews(true)}
       >

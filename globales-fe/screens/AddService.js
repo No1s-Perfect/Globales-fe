@@ -10,6 +10,7 @@ import {
 //formik
 import { Formik } from "formik";
 
+import { url } from '../components/Constants';
 //icons
 import { Octicons, Ionicons, Fontisto, AntDesign, FontAwesome } from "@expo/vector-icons";
 
@@ -48,7 +49,6 @@ const {brand,darkLight, primary} = Colors;
 //DateTimePicker
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Icon } from "react-native-elements";
-
  
 const AddService = ({navigation}) => {
     const [hidePassword, setHidePassword] = useState(true);
@@ -58,41 +58,69 @@ const AddService = ({navigation}) => {
     const [message, setMessage] = useState();
     const [messageType, setMessageType] = useState();
 
+    const [valuePicker, setValuePicker] = useState();
+
     //Actual date of birth to be sent
     const [dob, setDob] = useState();
-
+    
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setShow(false);
         setDate(currentDate);
         setDob(currentDate);
     };
-
+    
     const showDatePicker = () => {
         setShow(true);
     };
 
-    const handleAddService = (credentials, setSubmitting) => {
+    const handleAddService = async({descripcion, idCategoria, numTelefono,precioServicio,titulo,ubicacion}, setSubmitting) => {
         handleMessage(null);
-        const url= 'https://dbcc-186-179-64-43.ngrok.io/offers';
-        axios
-        .post(url,credentials)
+        try{
+            console.log(titulo, descripcion,precioServicio,idCategoria,ubicacion,numTelefono )
+            //const url= 'https://dbcc-186-179-64-43.ngrok.io/offers';
+            const res = await axios.post(url.offers, 
+                { titulo, descripcion,precioServicio,idUsuario:19,idCategoria,ubicacion,numTelefono }
+                );
+            console.log(res);
+        }catch(e){
+            console.log(e)
+        }
+        //const res = await axios.post(url.offers, { titulo, descripcion,precioServicio,idUsuario:1,idCategoria,ubicacion,numTelefono });
+        //const url= 'https://dbcc-186-179-64-43.ngrok.io/offers';
+        /*const params = JSON.stringify({
+            "titulo" : titulo, 
+            "descripcion":descripcion,
+            "precioServicio": precioServicio,
+            "idUsuario": 19,
+            "idCategoria": idCategoria,
+            "ubicacion": ubicacion,
+            "numTelefono": numTelefono,
+        });
+        console.log(params)
+        await axios
+        .post(url.offers,params,{
+            "headers": {
+                "content-type": "application/json",
+            },
+        })
         .then((response) => {
             const result = response.data;
             const {message, status, data} = result;
-
-            if(status !== 'SUCCESS'){
+console.log(result)
+            if(status != '200'){
                 handleMessage(message, status);
+                console.log("no")
             }else{
-                navigation.navigate('Cards', {...data});
+                console.log("ok")
             }
             setSubmitting(false);
         })
         .catch(error => {
-            //console.log(error.JSON());
+            console.log(error.JSON());
             setSubmitting(false);
             handleMessage("An error occurred. Check your network and try again");
-        });
+        });*/
     };
 
     const handleMessage = (message,type = 'FAILED') => {
@@ -105,7 +133,7 @@ const AddService = ({navigation}) => {
             <StyledContainer>
             <StatusBar style="dark"/>
                 <InnerContainer>
-                    <SubTile>Create a New Service</SubTile>
+                    <SubTile>Crear un nuevo servicio</SubTile>
 
                     {show && (
                         <DateTimePicker
@@ -119,16 +147,15 @@ const AddService = ({navigation}) => {
                     )}
                 
                 <Formik
-                    initialValues={{ubicacion: '', descripcion: '', numTelefono:'', precioServicio: '', idCategoria:''}}
+                    initialValues={{titulo:'',ubicacion: '', descripcion: '', numTelefono:'', precioServicio: '', idCategoria:1}}
                     onSubmit={(values,{setSubmitting}) => {
                         values = {...values};
-                        if(values.ubicacion == '' || values.descripcion == ''|| values.numTelefono == ""|| values.precioServicio== "" || values.idCategoria==""){
+                        if(values.titulo==''||values.ubicacion == '' || values.descripcion == ''|| values.numTelefono == ""|| values.precioServicio== "" || values.idCategoria==0){
                             handleMessage('Please fill all the fields');
                             setSubmitting(false);
                         }
                         else{
-                            //handleAddService(values, setSubmitting);
-                            console.log(values);
+                            handleAddService(values, setSubmitting);
                             navigation.navigate("Welcome"); 
                         }
                         
@@ -137,7 +164,16 @@ const AddService = ({navigation}) => {
                     {({handleChange, handleBlur, handleSubmit,values, isSubmitting}) => ( 
                     <StyledFormArea>
                         <MyTextInput
-                            label="Place where the service is offered"
+                            label="Titulo para el servicio"
+                            placeholder=""
+                            multiline={true}
+                            placeholderTextColor={darkLight}
+                            onChangeText={handleChange('titulo')}
+                            onBlur={handleBlur('titulo')}
+                            value={values.titulo}
+                        />
+                        <MyTextInput
+                            label="Ubicación del servicio que ofrece"
                             icon="location-arrow"
                             placeholder=""
                             placeholderTextColor={darkLight}
@@ -146,7 +182,7 @@ const AddService = ({navigation}) => {
                             value={values.name}
                         />
                         <MyTextInput
-                            label="Service description"
+                            label="Descripción del servicio"
                             placeholder=""
                             style={[styles.input, styles.textArea]}
                             multiline={true}
@@ -156,7 +192,7 @@ const AddService = ({navigation}) => {
                             value={values.descripcion}
                         />
                         <MyTextInput
-                            label="Phone Number"
+                            label="Numero de contacto"
                             icon="phone"
                             placeholder= ""
                             placeholderTextColor={darkLight}
@@ -165,7 +201,7 @@ const AddService = ({navigation}) => {
                             value={values.numTelefono}
                         />
                         <MyTextInput
-                            label="Cost of Service"
+                            label="Precio del servicio"
                             icon="money"
                             placeholder= ""
                             placeholderTextColor={darkLight}
@@ -173,11 +209,17 @@ const AddService = ({navigation}) => {
                             onBlur={handleBlur('precioServicio')}
                             value={values.precioServicio}
                         />
-                        <MyPicker 
-                            label="Service Type"
-                            icon="shield"
-                        />
-                
+                        <View>
+                            <StyledInputLabel>Tipo de servicio</StyledInputLabel>
+                             <Picker
+                             onValueChange={(itemValue,itemIndex) => values.idCategoria=parseInt(itemValue)}
+                             >
+                             <Picker.Item label="Jardinería" value="1"/>
+                             <Picker.Item label="Cocina" value="2" />
+                             <Picker.Item label="Electricidad" value="3"/>
+                             <Picker.Item label="Limpieza doméstica" value="4"/>
+                             </Picker>
+                        </View>
                         <MsgBox type={messageType}>{message}</MsgBox>
                         {/*
                         {!isSubmitting && (
@@ -193,7 +235,7 @@ const AddService = ({navigation}) => {
                         */}
                         
                         <StyledButton onPress={handleSubmit}>
-                            <ButtonText>Add</ButtonText>
+                            <ButtonText>Crear</ButtonText>
                         </StyledButton>
                         <Line/>
                     </StyledFormArea>
@@ -231,17 +273,19 @@ const MyTextInput = ({label, icon, isPassword, hidePassword,setHidePassword, isD
     
 };
 
-const MyPicker= ({label, icon}) => {
+const MyPicker= ({label, icon,onChangeCategory}) => {
+    
     return (
         <View>
           <StyledInputLabel>{label}</StyledInputLabel>
-          <Picker>
+          <Picker
+          onValueChange={(itemValue,itemIndex) => setValuePicker(itemValue)}
+          >
           <Picker.Item label="Jardinería" value="1"/>
           <Picker.Item label="Cocina" value="2" />
           <Picker.Item label="Electricidad" value="3"/>
           <Picker.Item label="Limpieza doméstica" value="4"/>
           </Picker>
-          
         </View>
       );
 }

@@ -23,7 +23,7 @@ const CardList = ({ setShow, infoCards,setIdOferta }) => {
             key={index}
             setShow={setShow}
             idOferta={info.idOferta}
-            title={info.descripcionCategoria}
+            title={info.tituloOferta}
             parla={info.descripcionOferta}
             url={info.pathCategoria}
             numTelefono={info.numTelefono}

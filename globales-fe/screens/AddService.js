@@ -1,7 +1,10 @@
-import React, {useState} from "react";
+import React, {useState,useContext} from "react";
 import { StatusBar } from "expo-status-bar";
 import { Text, TextInput, TouchableHighlight, StyleSheet } from "react-native";
 import Toast from "react-native-toast-message";
+
+import UserContext from '../components/context/UserContext';
+
 import {
     Platform,
     Button,Picker
@@ -51,6 +54,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { Icon } from "react-native-elements";
  
 const AddService = ({navigation}) => {
+    const { user, setUser } = useContext(UserContext);
+
     const [hidePassword, setHidePassword] = useState(true);
     const [show, setShow] = useState(false);
     const [date, setDate] = useState(new Date(2000,0,1));
@@ -77,50 +82,13 @@ const AddService = ({navigation}) => {
     const handleAddService = async({descripcion, idCategoria, numTelefono,precioServicio,titulo,ubicacion}, setSubmitting) => {
         handleMessage(null);
         try{
-            console.log(titulo, descripcion,precioServicio,idCategoria,ubicacion,numTelefono )
-            //const url= 'https://dbcc-186-179-64-43.ngrok.io/offers';
             const res = await axios.post(url.offers, 
-                { titulo, descripcion,precioServicio,idUsuario:19,idCategoria,ubicacion,numTelefono }
+                { titulo, descripcion,precioServicio,idUsuario:user.id,idCategoria,ubicacion,numTelefono }
                 );
-            console.log(res);
+            console.log({res});
         }catch(e){
             console.log(e)
         }
-        //const res = await axios.post(url.offers, { titulo, descripcion,precioServicio,idUsuario:1,idCategoria,ubicacion,numTelefono });
-        //const url= 'https://dbcc-186-179-64-43.ngrok.io/offers';
-        /*const params = JSON.stringify({
-            "titulo" : titulo, 
-            "descripcion":descripcion,
-            "precioServicio": precioServicio,
-            "idUsuario": 19,
-            "idCategoria": idCategoria,
-            "ubicacion": ubicacion,
-            "numTelefono": numTelefono,
-        });
-        console.log(params)
-        await axios
-        .post(url.offers,params,{
-            "headers": {
-                "content-type": "application/json",
-            },
-        })
-        .then((response) => {
-            const result = response.data;
-            const {message, status, data} = result;
-console.log(result)
-            if(status != '200'){
-                handleMessage(message, status);
-                console.log("no")
-            }else{
-                console.log("ok")
-            }
-            setSubmitting(false);
-        })
-        .catch(error => {
-            console.log(error.JSON());
-            setSubmitting(false);
-            handleMessage("An error occurred. Check your network and try again");
-        });*/
     };
 
     const handleMessage = (message,type = 'FAILED') => {
@@ -156,7 +124,7 @@ console.log(result)
                         }
                         else{
                             handleAddService(values, setSubmitting);
-                            navigation.navigate("Welcome"); 
+                            //navigation.navigate("Welcome"); 
                         }
                         
                     }}

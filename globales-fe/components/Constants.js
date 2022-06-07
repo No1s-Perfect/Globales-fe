@@ -3,4 +3,5 @@ export const url = {
     feedback:`${domain}feedback`,
     offers:`${domain}offers`,
     login:`${domain}login`,
+    addUser:`${domain}addUser`,
 }

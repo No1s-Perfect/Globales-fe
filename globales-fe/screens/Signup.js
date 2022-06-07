@@ -33,7 +33,7 @@ import {
   TextLink,
   TextLinkContent,
 } from '../components/styles';
-import { View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, TouchableOpacity, ActivityIndicator, Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
 //Colors
 const { brand, darkLight, primary } = Colors;
@@ -84,6 +84,7 @@ const Signup = ({ navigation }) => {
         password,
         fecNacimento,
       });
+      console.log(nombreUsuario + ", " + correoElectronico, ", ", password, "," , fecNacimento);
       Toast.show({
         type: 'success',
         text1: 'Everything went smoothly 👋',
@@ -108,7 +109,7 @@ const Signup = ({ navigation }) => {
         <InnerContainer>
           <PageTitle>Empleo Express</PageTitle>
           <SubTile>Account Signup</SubTile>
-
+          
           {show && (
             <DateTimePicker
               testID="dateTimePicker"
@@ -120,7 +121,9 @@ const Signup = ({ navigation }) => {
             />
           )}
 
-          <Formik
+
+
+        <Formik
             initialValues={{
               nombreUsuario: '',
               correoElectronico: '',
@@ -169,18 +172,36 @@ const Signup = ({ navigation }) => {
                   value={values.correoElectronico}
                   keyboardType="email-address"
                 />
-                <MyTextInput
-                  label="Date of Birth"
-                  icon="calendar"
-                  placeholder="YYYY - MM - DD"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange('fecNacimento')}
-                  onBlur={handleBlur('fecNacimento')}
-                  value={dob ? dob.toDateString() : ''}
-                  isDate={true}
-                  editable={false}
-                  showDatePicker={showDatePicker}
-                />
+
+                {Platform.OS === 'ios' && 
+                            
+                            <DateTimePicker
+                                style={{width:'100%'}}
+                                testID="dateTimePicker"
+                                value={date}
+                                mode= 'date'
+                                is24Hour={true}
+                                display= "default"
+                                onChange={onChange}
+                            />
+                         
+                }
+                {Platform.OS === 'android' && <MyTextInput
+
+                    label="Date of Birth"
+                    icon="calendar"
+                    placeholder= "YYYY - MM - DD"
+                    placeholderTextColor={darkLight}
+                    onChangeText={handleChange('fecNacimento')}
+                    onBlur={handleBlur('fecNacimento')}
+                    value={dob ? dob.toDateString() : ''}  
+                    isDate={true}
+                    editable= {false}
+                    showDatePicker={showDatePicker}
+                    />
+                                           
+             }
+                
 
                 <MyTextInput
                   label="Password"

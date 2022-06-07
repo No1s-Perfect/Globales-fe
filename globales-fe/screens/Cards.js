@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import ModalReview from '../components/ModalReview';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView , RefreshControl} from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Tostada from '../components/Tostada';
 import CardList from '../components/CardList';
@@ -26,7 +26,12 @@ const Cards = () => {
       setFetching(false);
     }
   };
+  const onRefresh = useCallback(() => {
+    handleOffers()
+  }, []);
+
   useEffect(() => {
+    console.log('cards');
     handleOffers();
   }, []);
   return (
@@ -39,7 +44,7 @@ const Cards = () => {
         lightTheme
         round
       />
-      <ScrollView>
+      <ScrollView refreshControl={<RefreshControl refreshing={fetching} onRefresh={onRefresh} />}>
         <View style={{ marginBottom: 100 }}>
           {!fetching && (
             <CardList
@@ -62,4 +67,3 @@ const Cards = () => {
 };
 
 export default Cards;
-

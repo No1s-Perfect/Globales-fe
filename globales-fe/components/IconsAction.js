@@ -1,23 +1,10 @@
-import { Icon } from "react-native-elements";
-import { Pressable, Vibration } from "react-native";
-const IconsAction = ({ setShow, setViewInfo, setViewReviews, sendMsg,setIdOferta,idOferta }) => {
+import { Icon } from 'react-native-elements';
+import { Pressable, Vibration } from 'react-native';
+const IconsAction = ({ setShow, setViewInfo, setViewReviews, sendMsg, setIdOferta, idOferta }) => {
   return (
     <>
-      <Icon
-        raised
-        name="info"
-        type="antdesign"
-        color="#517fa4"
-        onPress={() => setViewInfo(true)}
-      />
-      <Pressable
-        onLongPress={() => {
-          Vibration.vibrate(10);
-          setShow(true);
-          setIdOferta(idOferta)
-        }}
-        onPress={() => setViewReviews(true)}
-      >
+      <Icon raised name="info" type="antdesign" color="#517fa4" onPress={() => setViewInfo(true)} />
+      <Pressable onPress={() => setViewReviews(true)}>
         <Icon raised name="feedback" type="material" color="#517fa4" />
       </Pressable>
       <Icon
@@ -25,7 +12,11 @@ const IconsAction = ({ setShow, setViewInfo, setViewReviews, sendMsg,setIdOferta
         name="chat-plus-outline"
         type="material-community"
         color="#517fa4"
-        onPress={sendMsg}
+        onPress={() => {
+          Vibration.vibrate(10);
+          setShow(true);
+          setIdOferta(idOferta);
+        }}
       />
     </>
   );

@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext,useCallback } from 'react';
-import ModalReview from '../components/ModalReview';
+import ModalReview from '../components/ModalEditOffer';
 import { View, ScrollView , RefreshControl} from 'react-native';
 import Tostada from '../components/Tostada';
 import CardListOffersU from '../components/CardListOffersU';
@@ -10,7 +10,7 @@ import Spinner from '../components/Spinner';
 
 
 import UserContext from '../components/context/UserContext';
-const CardsOffersU = () => {
+const CardsOffersU = ({navigation}) => {
   const { user, setUser } = useContext(UserContext);
 
   const [show, setShow] = useState(false);

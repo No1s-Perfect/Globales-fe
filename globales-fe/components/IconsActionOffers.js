@@ -10,7 +10,8 @@ const IconsAction = ({ setShow, setEditOffer, setViewReviews, sendMsg,setIdOfert
         <Icon raised name="add" type="material" color="#2196F3" />
       </Pressable>
       <Pressable 
-        onPress={() => navigation.navigate("AddService") }//todo: Enviar al add services
+        onPress={() => {setShow(true);
+          setIdOferta(idOferta);} }
       >
         <Icon raised name="edit" type="material" color="#2196F3" />
       </Pressable>

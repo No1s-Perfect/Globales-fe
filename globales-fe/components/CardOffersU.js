@@ -31,7 +31,6 @@ const CardView = ({ setShow, idOferta, title, parla, setIdOferta }) => {
           <IconsAction
               setViewReviews={setViewReviews}
               setShow={setShow}
-              setEditOffer={setEditOffer}
               setIdOferta={setIdOferta}
               idOferta={idOferta}
             />
@@ -39,8 +38,7 @@ const CardView = ({ setShow, idOferta, title, parla, setIdOferta }) => {
         </>
       )}
       {viewReviews && <FeedBackList idOferta={idOferta}></FeedBackList>}
-      {editOffer && 
-                navigation.navigate('Login')}
+      
     </Card>
   );
 };

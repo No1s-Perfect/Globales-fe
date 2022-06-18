@@ -4,7 +4,7 @@ import Melon from "../components/Melon";
 import Cards from "../screens/Cards";
 import Post from "../components/Post";
 import AddService from "../screens/AddService";
-
+import Account from '../components/Account';
 const Tab = createBottomTabNavigator();
 const Tabs = () => (
   <Tab.Navigator
@@ -41,6 +41,14 @@ const Tabs = () => (
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="bell" color={color} size={size} />
         ),
+      }}
+    />
+    <Tab.Screen
+      name="Account"
+      component={Account}
+      options={{
+        tabBarLabel: 'Account',
+        tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account" color={color} size={size} />,
       }}
     />
   </Tab.Navigator>

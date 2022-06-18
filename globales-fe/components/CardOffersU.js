@@ -5,6 +5,7 @@ import { useState } from 'react';
 import FeedBackList from './FeedBackList';
 const CardView = ({ setShow, idOferta, title, parla, setIdOferta }) => {
   const [viewReviews, setViewReviews] = useState(false);
+  const [editOffer, setEditOffer] = useState(false);
   const goBack = () => {
     setViewReviews(false);
   };
@@ -30,15 +31,16 @@ const CardView = ({ setShow, idOferta, title, parla, setIdOferta }) => {
           <IconsAction
               setViewReviews={setViewReviews}
               setShow={setShow}
+              setEditOffer={setEditOffer}
               setIdOferta={setIdOferta}
-              
               idOferta={idOferta}
             />
           </View>
         </>
       )}
       {viewReviews && <FeedBackList idOferta={idOferta}></FeedBackList>}
-      
+      {editOffer && 
+                navigation.navigate('Login')}
     </Card>
   );
 };

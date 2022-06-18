@@ -1,6 +1,7 @@
 import { Icon, Text } from "react-native-elements";
 import { Pressable, Vibration ,StyleSheet} from "react-native";
-const IconsAction = ({ setShow, setViewInfo, setViewReviews, sendMsg,setIdOferta,idOferta }) => {
+
+const IconsAction = ({ setShow, setEditOffer, setViewReviews, sendMsg,setIdOferta,idOferta }) => {
   return (
     <>
       <Pressable 
@@ -9,7 +10,7 @@ const IconsAction = ({ setShow, setViewInfo, setViewReviews, sendMsg,setIdOferta
         <Icon raised name="add" type="material" color="#2196F3" />
       </Pressable>
       <Pressable 
-        onPress={() => setViewReviews(true)}//todo: Enviar al add services
+        onPress={() => navigation.navigate("AddService") }//todo: Enviar al add services
       >
         <Icon raised name="edit" type="material" color="#2196F3" />
       </Pressable>

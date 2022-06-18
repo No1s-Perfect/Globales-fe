@@ -142,10 +142,13 @@ const Signup = ({ navigation }) => {
               ) {
                 handleMessage('Please fill all the fields');
                 setSubmitting(false);
+              } else if(values.password.length<8 ){
+                handleMessage('Password too short. Use at least 8 characters');
+                setSubmitting(false);
               } else if (values.password !== values.confirmPassword) {
                 handleMessage('Passwords do not match');
                 setSubmitting(false);
-              } else {
+              }else {
                 handleSignup(values, setSubmitting);
                 navigation.navigate('Login');
               }

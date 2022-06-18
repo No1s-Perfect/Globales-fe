@@ -49,7 +49,7 @@ const Cards = () => {
         <View style={{ marginBottom: 100 }}>
           {!fetching && (
             <CardList
-                           infoCards={search.length > 0 ? infoCards.filter((info) => info.tituloOferta.toLowerCase().includes(search.toLowerCase())) : infoCards}
+             infoCards={search.length > 0 ? infoCards.filter((info) => info.descripcionCategoria.toLowerCase().includes(search.toLowerCase())) : infoCards}
               setShow={setShow}
               setIdOferta={setIdOferta}
             />

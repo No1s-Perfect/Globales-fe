@@ -17,7 +17,7 @@ const EditOffer = ({setShow,setFetchReview, idOferta}) => {
     try{
       console.log(idOferta,'asdasdasdasd')
       setFetchReview(true)
-      await axios.post(`https://8d2a-186-179-64-82.ngrok.io/offers/${idOferta}`,{
+      await axios.post(`${url.offers}/${idOferta}`,{
         titulo : text, 
         descripcion: descripcion,
         precioServicio: precioServicio,

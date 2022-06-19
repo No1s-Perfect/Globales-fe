@@ -8,11 +8,18 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import EditOffer from "./EditOffer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "./Spinner";
 import Toast from "react-native-toast-message";
-const ModalReview = ({ show, setShow, idOferta }) => {
+const ModalReview = ({ show, setShow, idOferta , oferta, cb}) => {
   const [fetchReview, setFetchReview] = useState(false);
+
+
+  useEffect(()=>{
+    console.log(oferta)
+
+
+  },[])
   return (
     <>
       <View style={styles.centeredView}>
@@ -25,7 +32,7 @@ const ModalReview = ({ show, setShow, idOferta }) => {
 
               {!fetchReview && (
                 <>
-                  <EditOffer idOferta={idOferta} setFetchReview={setFetchReview} setShow={setShow}/>
+                  <EditOffer cb={cb} oferta={oferta} idOferta={idOferta} setFetchReview={setFetchReview} setShow={setShow}/>
                 </>
               )}
               {fetchReview && <Spinner />}
@@ -82,3 +89,4 @@ const styles = StyleSheet.create({
 });
 
 export default ModalReview;
+

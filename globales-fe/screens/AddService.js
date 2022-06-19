@@ -208,10 +208,12 @@ const AddService = ({ navigation }) => {
                 <View>
                   <StyledInputLabel>Tipo de servicio</StyledInputLabel>
                   <Picker onValueChange={(itemValue, itemIndex) => (values.idCategoria = parseInt(itemValue))}>
-                    <Picker.Item label="Jardinería" value="1" />
-                    <Picker.Item label="Cocina" value="2" />
-                    <Picker.Item label="Electricidad" value="3" />
-                    <Picker.Item label="Limpieza doméstica" value="4" />
+                  <Picker.Item label="Jardinería" value="1" />
+                  <Picker.Item label="Cocina" value="2" />
+                  <Picker.Item label="Electricidad" value="3" />
+                  <Picker.Item label="Limpieza doméstica" value="4" />
+                  <Picker.Item label="Decoración de Interiores" value="9" />
+                  <Picker.Item label="Desarrollador" value="11" />
                   </Picker>
                 </View>
                 <MsgBox type={messageType}>{message}</MsgBox>
@@ -264,19 +266,6 @@ const MyTextInput = ({ label, icon, isPassword, hidePassword, setHidePassword, i
   );
 };
 
-const MyPicker = ({ label, icon, onChangeCategory }) => {
-  return (
-    <View>
-      <StyledInputLabel>{label}</StyledInputLabel>
-      <Picker onValueChange={(itemValue, itemIndex) => setValuePicker(itemValue)}>
-        <Picker.Item label="Jardinería" value="1" />
-        <Picker.Item label="Cocina" value="2" />
-        <Picker.Item label="Electricidad" value="3" />
-        <Picker.Item label="Limpieza doméstica" value="4" />
-      </Picker>
-    </View>
-  );
-};
 
 const styles = StyleSheet.create({
   container: {

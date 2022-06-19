@@ -16,8 +16,8 @@ const Feed = ({ msg, nombre, star }) => {
       <Animated.View
         style={{
           opacity: fadeAnim,
-          borderColor: "green",
-          borderWidth: 1,
+          borderColor: "#6D28D9",
+          borderWidth: 2,
           borderRadius: 10,
           marginTop: 6,
           alignItems: "center",
@@ -25,17 +25,27 @@ const Feed = ({ msg, nombre, star }) => {
         }}
       >
         <View>
-          <Text>{nombre}</Text>
+          <Text
+            style={{
+            fontWeight: "bold",
+            fontSize: 15,
+            color:"#606060"
+          }}>
+            {nombre}
+            </Text>
         </View>
         <View>
           <AirbnbRating
             reviews={["Muy Mal", "Mal", "Regular", "Bueno", "Excelente"]}
             showRating
-            size={10}
-            reviewSize={10}
+            size={18}
+            reviewSize={15}
             startingValue={0}
             isDisabled
             defaultRating={star}
+            reviewColor='black'
+            selectedColor='#F5DC3C'
+
             starContainerStyle={{}}
             ratingContainerStyle={{ alignSelf: "flex-start" }}
           />

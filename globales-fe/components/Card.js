@@ -6,7 +6,18 @@ import { useState } from 'react';
 import FeedBackList from './FeedBackList';
 import Toast from 'react-native-toast-message';
 import Spinner from './Spinner';
-const CardView = ({ setShow, idOferta, title, parla, url, numTelefono, ubicacion, nomUsuario, setIdOferta }) => {
+const CardView = ({
+  setShow,
+  idOferta,
+  title,
+  parla,
+  url,
+  numTelefono,
+  ubicacion,
+  nomUsuario,
+  setIdOferta,
+  precioServicio,
+}) => {
   const [viewInfo, setViewInfo] = useState(false);
   const [viewReviews, setViewReviews] = useState(false);
   const [sendMsg, setSendMsg] = useState(false);
@@ -68,7 +79,14 @@ const CardView = ({ setShow, idOferta, title, parla, url, numTelefono, ubicacion
           </View>
         </>
       )}
-      {viewInfo && <Info numTelefono={numTelefono} ubicacion={ubicacion} nomUsuario={nomUsuario}></Info>}
+      {viewInfo && (
+        <Info
+          numTelefono={numTelefono}
+          ubicacion={ubicacion}
+          nomUsuario={nomUsuario}
+          precioServicio={precioServicio}
+        ></Info>
+      )}
       {viewReviews && <FeedBackList idOferta={idOferta}></FeedBackList>}
       {sendMsg && (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -124,3 +142,4 @@ const styles = StyleSheet.create({
 });
 
 export default CardView;
+

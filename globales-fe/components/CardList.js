@@ -30,6 +30,7 @@ const CardList = ({ setShow, infoCards,setIdOferta }) => {
             ubicacion={info.ubicacion}
             nomUsuario={info.nombreUsuario}
             setIdOferta={setIdOferta}
+            precioServicio={info.precioServicio}
           ></CardView>
         ))}
       </Animated.View>
@@ -38,3 +39,4 @@ const CardList = ({ setShow, infoCards,setIdOferta }) => {
 };
 
 export default CardList;
+

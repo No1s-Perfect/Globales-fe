@@ -20,7 +20,7 @@ const CardsOffersU = ({navigation}) => {
   const handleOffers = async () => {
     try {
       setFetching(true);
-      const res = await axios.get(`https://8d2a-186-179-64-82.ngrok.io/offersUser/${user.id}`);
+      const res = await axios.get( `${url.userOffers}/${user.id}`);
       console.log(res.data);
       setInfoCards(res.data);
     } catch (e) {

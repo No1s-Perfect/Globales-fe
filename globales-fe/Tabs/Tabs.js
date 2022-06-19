@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Melon from "../components/Melon";
 import Cards from "../screens/Cards";
 import Post from "../components/Post";
+import CardsOffersU from "../screens/CardsOffersU";
 import AddService from "../screens/AddService";
 import Account from '../components/Account';
 const Tab = createBottomTabNavigator();
@@ -35,7 +36,7 @@ const Tabs = () => (
     />
     <Tab.Screen
       name="Notifications"
-      component={Melon}
+      component={CardsOffersU}
       options={{
         tabBarLabel: "Updates",
         tabBarIcon: ({ color, size }) => (

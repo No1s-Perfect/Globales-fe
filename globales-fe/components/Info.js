@@ -12,6 +12,20 @@ const Info = ({numTelefono, ubicacion, nomUsuario, precioServicio}) => {
   }, [fadeAnim]);
   return (
     <Animated.View style={{ opacity: fadeAnim }}>
+        <View style={styles.row}>
+        <View style={styles.right}>
+          <Icon
+            raised
+            size={10}
+            name="user"
+            type="evilicon"
+            color="#6D28D9"
+          />
+        </View>
+        <View style={styles.text}>
+          <Text style={styles.data}>{nomUsuario}</Text>
+        </View>
+      </View>
       <View style={styles.row}>
         <View style={styles.right}>
           <Icon
@@ -19,12 +33,12 @@ const Info = ({numTelefono, ubicacion, nomUsuario, precioServicio}) => {
             raised
             name="phone"
             type="antdesign"
-            color="#517fa4"
+            color="#6D28D9"
           />
           
         </View>
         <View style={styles.text}>
-          <Text>{numTelefono}</Text>
+          <Text style={styles.data}>{numTelefono}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -34,25 +48,11 @@ const Info = ({numTelefono, ubicacion, nomUsuario, precioServicio}) => {
             size={10}
             name="location"
             type="evilicon"
-            color="#517fa4"
+            color="#6D28D9"
           />
         </View>
         <View style={styles.text}>
-          <Text>{ubicacion}</Text>
-        </View>
-      </View>
-      <View style={styles.row}>
-        <View style={styles.right}>
-          <Icon
-            raised
-            size={10}
-            name="user"
-            type="evilicon"
-            color="#517fa4"
-          />
-        </View>
-        <View style={styles.text}>
-          <Text>{nomUsuario}</Text>
+          <Text style={styles.data}>{ubicacion}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -62,11 +62,11 @@ const Info = ({numTelefono, ubicacion, nomUsuario, precioServicio}) => {
             size={10}
             name="dollar"
             type="font-awesome"
-            color="#517fa4"
+            color="#6D28D9"
           />
         </View>
         <View style={styles.text}>
-          <Text>{precioServicio}</Text>
+          <Text style={styles.data}>{precioServicio}</Text>
         </View>
       </View>
     </Animated.View>
@@ -76,7 +76,7 @@ const Info = ({numTelefono, ubicacion, nomUsuario, precioServicio}) => {
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   right: {
     marginRight: 10,
@@ -85,6 +85,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  data:{
+
+      fontWeight: "bold",
+      fontSize: 13,
+    
+  }
 });
 
 export default Info;

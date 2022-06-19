@@ -24,7 +24,7 @@ const Review = ({setShow,setFetchReview, idOferta}) => {
       
       Toast.show({
         type: "success",
-        text2: "Everything went smoothly 👋",
+        text2: "Su comentario ha sido posteado",
       });
       
     }catch(e){
@@ -44,6 +44,8 @@ const Review = ({setShow,setFetchReview, idOferta}) => {
         size={20}
         startingValue={0}
         defaultRating={0}
+        reviewColor='#808080'
+        selectedColor="#F5DC3C"
         onFinishRating={(rating) => setRating(rating)}
       />
       <View style={{ flexDirection: 'row' }}>
@@ -71,6 +73,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
     flexWrap: 'wrap',
+    borderColor:"#6D28D9",
+    borderWidth:2,
     flex: 1,
   },
   textStyle: {
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F194FF",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#10B981",
   },
 });
 

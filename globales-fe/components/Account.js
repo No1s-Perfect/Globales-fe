@@ -2,15 +2,16 @@ import { useState, useContext } from 'react';
 import { Image, View } from 'react-native';
 import UserContext from './context/UserContext';
 import { Text, StyleSheet, Button } from 'react-native';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 const Account = () => {
   const { user, setUser } = useContext(UserContext);
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={require('./../assets/img/rayo.png')} />
-      <Text style={styles.baseText}>Email: {user.email}</Text>
-      <Text style={styles.baseText}>Name: {user.nombre}</Text>
-      <Button onPress={() => setUser(null)} title="Log out" color="red" accessibilityLabel="Log out" />
+      <MaterialCommunityIcons name="account" color="#6D28D9" size={100} />
+      <Text style={styles.baseText}>Correo Electrónico: {user.email}</Text>
+      <Text style={styles.baseText}>Nombre de Usuario: {user.nombre}</Text>
+      <Button onPress={() => setUser(null)} title="Log out" color="#10B981" accessibilityLabel="Log out" />
     </View>
   );
 };

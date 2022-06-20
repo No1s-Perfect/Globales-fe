@@ -9,9 +9,22 @@ const Account = () => {
   return (
     <View style={styles.container}>
       <MaterialCommunityIcons name="account" color="#6D28D9" size={100} />
-      <Text style={styles.baseText}>Correo Electrónico: {user.email}</Text>
-      <Text style={styles.baseText}>Nombre de Usuario: {user.nombre}</Text>
-      <Button onPress={() => setUser(null)} title="Log out" color="#10B981" accessibilityLabel="Log out" />
+      <Text style={styles.baseText}>Correo Electrónico</Text>
+      <Text  style={{
+            fontWeight: "bold",
+            fontSize: 15,
+            paddingBottom:30
+          }}>{user.email}</Text>
+
+      <Text style={styles.baseText}>Nombre de Usuario</Text>
+      <Text style={{
+            fontWeight: "bold",
+            fontSize: 15,
+            paddingBottom:100
+          }}>{user.nombre}</Text>
+
+      
+      <Button onPress={() => setUser(null)} title="Cerrar Sesión" color="#10B981" accessibilityLabel="Log out" />
     </View>
   );
 };
@@ -24,12 +37,12 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-around',
     height: '100%',
     width: '100%',
-   
+    paddingTop:40,
   },
   baseText: {
+    paddingTop:40,
     fontFamily: 'Cochin',
   },
   titleText: {

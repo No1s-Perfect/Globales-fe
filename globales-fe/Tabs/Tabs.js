@@ -45,7 +45,7 @@ const Tabs = () => (
       }}
     />
     <Tab.Screen
-      name="Account"
+      name="Cuenta"
       component={Account}
       options={{
         tabBarLabel: 'Cuenta',

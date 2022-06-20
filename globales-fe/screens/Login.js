@@ -57,7 +57,7 @@ const Login = ({ navigation }) => {
       const res = await axios.post(url.login, { correoElectronico, password });
       Toast.show({
         type: 'success',
-        text1: 'Everything went smoothly 👋',
+        text1: 'Bienvenido 👋',
       });
       console.log(res);
        setUser({ id: res.data.userInfo.id, email: correoElectronico, nombre: res.data.userInfo.nombreUsuario });
@@ -65,7 +65,7 @@ const Login = ({ navigation }) => {
       console.log("@@@@@@@@@")
       Toast.show({
         type: 'error',
-        text1: 'Password or email are incorrect',
+        text1: 'Correo electrónico o contraseña incorrecta',
       });
     }
   };
@@ -108,7 +108,7 @@ const Login = ({ navigation }) => {
         <InnerContainer>
           <PageLogo resizeMode="cover" source={require('./../assets/img/rayo.png')} />
           <PageTitle> Empleo Express </PageTitle>
-          <SubTile>Account Login</SubTile>
+          <SubTile>Inicio de Sesión</SubTile>
 
           <Formik
             initialValues={{ correoElectronico: '', password: '' }}
@@ -126,7 +126,7 @@ const Login = ({ navigation }) => {
             {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
               <StyledFormArea>
                 <MyTextInput
-                  label="email Address"
+                  label="Correo Electrónico"
                   icon="mail"
                   placeholder=""
                   placeholderTextColor={darkLight}
@@ -136,7 +136,7 @@ const Login = ({ navigation }) => {
                   keyboardType="email-address"
                 />
                 <MyTextInput
-                  label="Password"
+                  label="Contraseña"
                   icon="lock"
                   placeholder=""
                   placeholderTextColor={darkLight}
@@ -164,31 +164,20 @@ const Login = ({ navigation }) => {
                         */}
 
                 <StyledButton onPress={handleSubmit}>
-                  <ButtonText>Login</ButtonText>
+                  <ButtonText>Iniciar</ButtonText>
                 </StyledButton>
 
                 <Line />
 
-                {!googleSubmitting && (
-                  <StyledButton google={true} onPress={handleGoogleSignin}>
-                    <Fontisto name="google" color={primary} size={25} />
-                    <ButtonText google={true}>Sign in with Google</ButtonText>
-                  </StyledButton>
-                )}
-
-                {googleSubmitting && (
-                  <StyledButton google={true} disabled={true}>
-                    <ActivityIndicator size="large" color={primary} />
-                  </StyledButton>
-                )}
+                
                 <ExtraView>
-                  <ExtraText>Don't have an account already?</ExtraText>
+                  <ExtraText>¿No tienes una contraseña aún? </ExtraText>
                   <TextLink
                     onPress={() => {
                       navigation.navigate('Signup');
                     }}
                   >
-                    <TextLinkContent>Sign up</TextLinkContent>
+                    <TextLinkContent>Registrarse</TextLinkContent>
                   </TextLink>
                 </ExtraView>
               </StyledFormArea>

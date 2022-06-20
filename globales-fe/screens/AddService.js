@@ -93,14 +93,14 @@ const AddService = ({ navigation }) => {
       });
       Toast.show({
         type: 'success',
-        text1: 'Service added',
+        text1: 'Servicio creado',
       });
       setTimeout(()=>navigation.navigate('Feed'),1000) 
       console.log('success')
     } catch (e) {
         Toast.show({
             type: 'error',
-            text1: 'There was an error while adding service',
+            text1: 'Hubo un error al añadir el servicio',
           });
     }
   };
@@ -160,7 +160,7 @@ const AddService = ({ navigation }) => {
             {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
               <StyledFormArea>
                 <MyTextInput
-                  label="Titulo para el servicio"
+                  label="Título para el servicio"
                   placeholder=""
                   multiline={true}
                   placeholderTextColor={darkLight}
@@ -188,13 +188,17 @@ const AddService = ({ navigation }) => {
                   value={values.descripcion}
                 />
                 <MyTextInput
-                  label="Numero de contacto"
+                  label="Número de contacto"
                   icon="phone"
                   placeholder=""
                   placeholderTextColor={darkLight}
                   onChangeText={handleChange('numTelefono')}
                   onBlur={handleBlur('numTelefono')}
                   value={values.numTelefono}
+                  keyboardType='phone-pad'
+                  maxLength={8}
+                  numberOfLines={4}
+                  multiple
                 />
                 <MyTextInput
                   label="Precio del servicio"

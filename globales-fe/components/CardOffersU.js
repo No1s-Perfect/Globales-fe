@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F194FF',
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#10B981',
   },
   textStyle: {
     color: 'white',

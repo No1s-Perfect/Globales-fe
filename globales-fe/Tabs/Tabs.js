@@ -15,30 +15,30 @@ const Tabs = () => (
     }}
   >
     <Tab.Screen
-      name="Feed"
+      name="Servicios"
       component={Cards}
       options={{
-        tabBarLabel: "Home",
+        tabBarLabel: "Principal",
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="home" color={color} size={size} />
         ),
       }}
     />
     <Tab.Screen
-      name="Add a New Service"
+      name="Nuevo"
       component={AddService}
       options={{
-        tabBarLabel: "Create Service",
+        tabBarLabel: "Crear Servicio",
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="plus-circle-outline" color={color} size={size} />
         ),
       }}
     />
     <Tab.Screen
-      name="Notifications"
+      name="Notificaciones"
       component={CardsOffersU}
       options={{
-        tabBarLabel: "Updates",
+        tabBarLabel: "Notificaciones",
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="bell" color={color} size={size} />
         ),
@@ -48,7 +48,7 @@ const Tabs = () => (
       name="Account"
       component={Account}
       options={{
-        tabBarLabel: 'Account',
+        tabBarLabel: 'Cuenta',
         tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="account" color={color} size={size} />,
       }}
     />

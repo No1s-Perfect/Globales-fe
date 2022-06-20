@@ -36,7 +36,7 @@ const EditOffer = ({setShow,setFetchReview, idOferta, oferta, cb}) => {
       cb(idOferta, text, ubicacion, descripcion, num, precio )
       Toast.show({
         type: "success",
-        text2: "Everything went smoothly 👋",
+        text2: "Sus cambios han sido realizados",
       });
       
     }catch(e){
@@ -53,7 +53,7 @@ const EditOffer = ({setShow,setFetchReview, idOferta, oferta, cb}) => {
     <View style={{ flexDirection: 'row' }}>
     <TextInput
       style={styles.input}
-      placeholder="Titulo"
+      placeholder="Título del servicio"
       value={text}
       textAlignVertical="top"
       multiple
@@ -65,7 +65,7 @@ const EditOffer = ({setShow,setFetchReview, idOferta, oferta, cb}) => {
     <TextInput
       style={styles.input}
       value={ubicacion}
-      placeholder="Ubicación"
+      placeholder="Ubicación del servicio"
       textAlignVertical="top"
       multiple
       onChangeText={setUbicacion}
@@ -91,7 +91,7 @@ const EditOffer = ({setShow,setFetchReview, idOferta, oferta, cb}) => {
       multiple
       onChangeText={setNumTelefono}
       keyboardType='phone-pad'
-      maxLength={9}
+      maxLength={8}
       numberOfLines={4}
     />
   </View><View style={{ flexDirection: 'row' }}>

@@ -87,12 +87,12 @@ const Signup = ({ navigation }) => {
       console.log(nombreUsuario + ", " + correoElectronico, ", ", password, "," , fecNacimento);
       Toast.show({
         type: 'success',
-        text1: 'Everything went smoothly 👋',
+        text1: 'Te has registrado correctamente 👋',
       });
     } catch (e) {
       Toast.show({
         type: 'error',
-        text1: 'There was an error while registering your account',
+        text1: 'Ocurrió un error al registrar tu cuenta',
       });
     }
   };
@@ -108,7 +108,7 @@ const Signup = ({ navigation }) => {
         <StatusBar style="dark" />
         <InnerContainer>
           <PageTitle>Empleo Express</PageTitle>
-          <SubTile>Account Signup</SubTile>
+          <SubTile>Registro de Cuenta</SubTile>
           
           {show && (
             <DateTimePicker
@@ -140,13 +140,13 @@ const Signup = ({ navigation }) => {
                 values.password == '' ||
                 values.confirmPassword == ''
               ) {
-                handleMessage('Please fill all the fields');
+                handleMessage('Por favor complete todos los campos');
                 setSubmitting(false);
               } else if(values.password.length<8 ){
-                handleMessage('Password too short. Use at least 8 characters');
+                handleMessage('Contraseña muy corta. Debe ser mínimo 8 caracteres');
                 setSubmitting(false);
               } else if (values.password !== values.confirmPassword) {
-                handleMessage('Passwords do not match');
+                handleMessage('Constraseñas no son iguales');
                 setSubmitting(false);
               }else {
                 handleSignup(values, setSubmitting);
@@ -157,7 +157,7 @@ const Signup = ({ navigation }) => {
             {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
               <StyledFormArea>
                 <MyTextInput
-                  label="Full Name"
+                  label="Nombre Completo"
                   icon="person"
                   placeholder=""
                   placeholderTextColor={darkLight}
@@ -166,7 +166,7 @@ const Signup = ({ navigation }) => {
                   value={values.nombreUsuario}
                 />
                 <MyTextInput
-                  label="Email Address"
+                  label="Correo Electrónico"
                   icon="mail"
                   placeholder=""
                   placeholderTextColor={darkLight}
@@ -191,7 +191,7 @@ const Signup = ({ navigation }) => {
                 }
                 {Platform.OS === 'android' && <MyTextInput
 
-                    label="Date of Birth"
+                    label="Fecha de Nacimiento"
                     icon="calendar"
                     placeholder= "YYYY - MM - DD"
                     placeholderTextColor={darkLight}
@@ -207,7 +207,7 @@ const Signup = ({ navigation }) => {
                 
 
                 <MyTextInput
-                  label="Password"
+                  label="Contraseña"
                   icon="lock"
                   placeholder=""
                   placeholderTextColor={darkLight}
@@ -222,7 +222,7 @@ const Signup = ({ navigation }) => {
                 />
 
                 <MyTextInput
-                  label="Confirm Password"
+                  label="Confirmación de Contraseña"
                   icon="lock"
                   placeholder=""
                   placeholderTextColor={darkLight}
@@ -249,18 +249,18 @@ const Signup = ({ navigation }) => {
                         */}
 
                 <StyledButton onPress={handleSubmit}>
-                  <ButtonText>Signup</ButtonText>
+                  <ButtonText>Registrarse</ButtonText>
                 </StyledButton>
                 <Line />
 
                 <ExtraView>
-                  <ExtraText>Already have an account?</ExtraText>
+                  <ExtraText>¿Ya tienes cuenta? </ExtraText>
                   <TextLink
                     onPress={() => {
                       navigation.navigate('Login');
                     }}
                   >
-                    <TextLinkContent>Login</TextLinkContent>
+                    <TextLinkContent>Inicio de Sesión</TextLinkContent>
                   </TextLink>
                 </ExtraView>
               </StyledFormArea>

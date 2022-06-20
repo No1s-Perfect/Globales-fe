@@ -7,13 +7,13 @@ const IconsAction = ({ setShow, setEditOffer, setViewReviews, sendMsg,setIdOfert
       <Pressable 
         onPress={() => setViewReviews(true)}
       >
-        <Icon raised name="add" type="material" color="#2196F3" />
+        <Icon raised name="add" type="material" color="#10B981" />
       </Pressable>
       <Pressable 
         onPress={() => {setShow(true);
           setIdOferta(idOferta);} }
       >
-        <Icon raised name="edit" type="material" color="#2196F3" />
+        <Icon raised name="edit" type="material" color="#10B981" />
       </Pressable>
     </>
       

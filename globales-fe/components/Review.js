@@ -51,7 +51,7 @@ const Review = ({setShow,setFetchReview, idOferta}) => {
       <View style={{ flexDirection: 'row' }}>
         <TextInput
           style={styles.input}
-          placeholder="Here you can rate this job"
+          placeholder="Añade un comentario"
           textAlignVertical="top"
           multiple
           onChangeText={setText}
@@ -73,8 +73,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
     flexWrap: 'wrap',
-    borderColor:"#6D28D9",
-    borderWidth:2,
+    backgroundColor:'#cfd0d1',
+    borderColor:'#cfd0d1',
+    color:'black',
     flex: 1,
   },
   textStyle: {

@@ -36,7 +36,7 @@ const Feed = ({ msg, nombre, star }) => {
         </View>
         <View>
           <AirbnbRating
-            reviews={["Muy Mal", "Mal", "Regular", "Bueno", "Excelente"]}
+            reviews={["Muy ", "Mal", "Regular", "Bueno", "Excelente"]}
             showRating
             size={18}
             reviewSize={15}

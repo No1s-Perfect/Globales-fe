@@ -121,6 +121,8 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 20,
     flexWrap: 'wrap',
+    backgroundColor:'#cfd0d1',
+    borderColor:'#cfd0d1',
     flex: 1,
   },
   textStyle: {
